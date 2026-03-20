@@ -1,0 +1,12 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+}
+
+.clock {
+  width: 100%;
+}
