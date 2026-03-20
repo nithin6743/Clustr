@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Clustr",
+  "version": "0.1.1",
+  "description": "A Chrome extension that allows users to create and manage clusters of bookmarks.",
+  "icons": {
+    "128": "./icons/icon128.png",
+    "48": "./icons/icon48.png",
+    "16": "./icons/icon16.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "../index.html"
+  }
+}
