@@ -1,9 +1,8 @@
 .board {
+  align-self: start; /* prevents stretch */
   width: 275px;
   height: auto;
   color: white;
-  padding-top: 1px;
-  padding-bottom: 30px;
   background-color: rgba(50, 50, 50, 0.5);
   backdrop-filter: blur(32px);
   border-style: solid;
@@ -11,6 +10,7 @@
   border-color: rgba(93, 93, 93, 0.4);
   border-radius: 10px;
   padding: 0 30px 20px 20px;
+  margin-bottom: 0;
 }
 
 .boardHeader {
@@ -24,23 +24,31 @@
 }
 
 .boardHeader img {
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
   padding: 8px;
 }
 
 .addLink,
-.boardDelete {
+.boardDelete,
+.boardEdit {
   background: none;
   border: none;
   margin: 0;
-  font-size: 16px;
+  font-size: 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 24px;
   height: 24px;
+  opacity: 0;
+}
+
+.addLink:hover,
+.boardDelete:hover,
+.boardEdit:hover {
+  opacity: 100;
 }
 
 .boardHeader img:hover {
@@ -68,7 +76,8 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  line-height: 32px;
+  line-height: 40px;
+  gap: 8px;
   padding: 0px 5px 0px 5px;
   text-decoration: none;
   color: white;
@@ -96,6 +105,9 @@
 .links:hover {
   background-color: rgba(125, 125, 125, 0.803);
 }
+.links:hover button {
+  opacity: 1;
+}
 
 .links img {
   width: 16px;
@@ -113,10 +125,17 @@
 
 .titleActions {
   display: flex;
-  gap: 16px;
+  gap: 10px;
 }
 
-.editLink,
+.titleActions button {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.board:hover .titleActions button {
+  opacity: 1;
+}
+
 .deleteLink {
   background: none;
   border: none;
@@ -129,11 +148,38 @@
   width: 16px;
   height: 16px;
   padding: 12px;
+  opacity: 0;
 }
 
-.editLink:hover,
 .deleteLink:hover {
   background-color: rgba(95, 53, 53, 0.657);
   cursor: pointer;
   border-radius: 8px;
+}
+
+.addLinkForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.addLinkForm button {
+  width: 100%;
+  height: 32px;
+  border: none;
+  background-color: rgb(255, 255, 255);
+  border-radius: 4px;
+}
+
+.addLinkTitle,
+.addLinkUrl {
+  padding: 6px;
+  border-radius: 4px;
+  background-color: rgba(135, 135, 135, 0.4);
+  border: none;
+}
+
+.addLinkTitle::placeholder,
+.addLinkUrl::placeholder {
+  color: aliceblue;
 }

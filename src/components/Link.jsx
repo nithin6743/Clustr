@@ -1,12 +1,10 @@
 import styles from './Board.module.css';
-function Link() {
+function Link({ link }) {
   return (
     <div className={styles.links}>
-      <a href='https://google.com' className={styles.linkContent}>
-        <img src='/icons/youtube.png' />
-        <span className={styles.linkText}>
-          figma freelancinf ideasgndfxgndg dgf ndf gn dg
-        </span>
+      <a href={link.url} className={styles.linkContent}>
+        <img src={link.favicon} />
+        <span className={styles.linkText}>{link.title}</span>
       </a>
       <button
         className={styles.deleteLink}
