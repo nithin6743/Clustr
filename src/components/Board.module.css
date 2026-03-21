@@ -1,0 +1,139 @@
+.board {
+  width: 275px;
+  height: auto;
+  color: white;
+  padding-top: 1px;
+  padding-bottom: 30px;
+  background-color: rgba(50, 50, 50, 0.5);
+  backdrop-filter: blur(32px);
+  border-style: solid;
+  border-width: 0.1px;
+  border-color: rgba(93, 93, 93, 0.4);
+  border-radius: 10px;
+  padding: 0 30px 20px 20px;
+}
+
+.boardHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 10px;
+  border-bottom: 2px solid rgba(120, 120, 120, 0.506);
+}
+
+.boardHeader img {
+  width: 24px;
+  height: 24px;
+  padding: 8px;
+}
+
+.addLink,
+.boardDelete {
+  background: none;
+  border: none;
+  margin: 0;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.boardHeader img:hover {
+  background-color: rgba(128, 128, 128, 0.657);
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.boardTitle {
+  margin: 0px 0px 8px 0px;
+  width: 200px;
+  font-size: 24px;
+  color: white;
+  cursor: grab;
+  user-select: none;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 15px;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  line-height: 32px;
+  padding: 0px 5px 0px 5px;
+  text-decoration: none;
+  color: white;
+  font-size: 0.9rem;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.linkContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0px 5px 0px 5px;
+  text-decoration: none;
+  color: white;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.links:hover {
+  background-color: rgba(125, 125, 125, 0.803);
+}
+
+.links img {
+  width: 16px;
+  height: 16px;
+}
+
+.linkText {
+  font-size: 16px;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.titleActions {
+  display: flex;
+  gap: 16px;
+}
+
+.editLink,
+.deleteLink {
+  background: none;
+  border: none;
+  margin: 0;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  padding: 12px;
+}
+
+.editLink:hover,
+.deleteLink:hover {
+  background-color: rgba(95, 53, 53, 0.657);
+  cursor: pointer;
+  border-radius: 8px;
+}

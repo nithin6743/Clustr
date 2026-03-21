@@ -1,5 +1,5 @@
 import styles from './Boards.module.css';
-import Board from '../Board/Board';
+import Board from './Board';
 
 function Boards() {
   return (

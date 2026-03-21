@@ -1,4 +1,25 @@
+@font-face {
+  font-family: 'MyFont';
+  src: url('/fonts/aeoniktrial-bold.otf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'MyFont';
+  src: url('/fonts/aeoniktrial-light.otf') format('truetype');
+  font-weight: light;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'MyFont';
+  src: url('/fonts/aeoniktrial-regular.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .app {
+  font-family: 'MyFont', Arial;
+  letter-spacing: 1.3px;
   display: flex;
   flex-direction: column;
   gap: 0px;

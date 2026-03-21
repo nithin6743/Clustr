@@ -1,6 +1,6 @@
 import './App.css';
-import Boards from './components/Boards/Boards';
-import Clock from './components/Clock/Clock';
+import Boards from './components/Boards';
+import Clock from './components/Clock';
 
 function App() {
   return (

@@ -1,4 +1,5 @@
 import styles from './Board.module.css';
+import Links from './Links';
 
 function Board() {
   return (
@@ -8,22 +9,17 @@ function Board() {
           <h3 className={styles.boardTitle}>Bookmarks</h3>
           <div className={styles.titleActions}>
             <button className={styles.addLink}>
-              <img src='/icons/link.png' />
+              <img src='/icons/link.svg' />
             </button>
-            <button className={styles.boardSettings}>
-              <img src='/icons/options.png' />
+            <button className={styles.boardDelete}>
+              <img src='/icons/delete.svg' />
             </button>
           </div>
         </div>
 
-        <a href='https://google.com' className={styles.links}>
-          <img src='/icons/youtube.png' />
-          <span className={styles.linkText}>
-            jfbndfkjbndfjfbdfbdfbdfbdfbdfbdfbdfbdf
-          </span>
-        </a>
+        <Links />
       </div>
-      <div className={styles.addLink}></div>
+      <div className={styles.addLinkForm}></div>
     </div>
   );
 }
