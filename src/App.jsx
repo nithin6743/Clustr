@@ -37,12 +37,25 @@ function App() {
     );
   }
 
+  function deleteLink( boardId, linkId ) {
+    setBoards((prev) =>
+      prev.map((board) =>
+        board.id === boardId
+          ? {
+              ...board,
+              links: board.links.filter((link) => link.id !== linkId),
+            }
+          : board
+      )
+    );
+  }
+
   return (
     <div className='app'>
       <div className='clock'>
         <Clock />
       </div>
-      <Boards boards={boards} addLink={addLink} />
+      <Boards boards={boards} addLink={addLink} deleteLink={deleteLink} />
     </div>
   );
 }

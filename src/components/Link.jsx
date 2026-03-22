@@ -1,5 +1,5 @@
 import styles from './Board.module.css';
-function Link({ link }) {
+function Link({ link, deleteLink, boardId }) {
   return (
     <div className={styles.links}>
       <a href={link.url} className={styles.linkContent}>
@@ -10,7 +10,7 @@ function Link({ link }) {
         className={styles.deleteLink}
         onClick={(e) => {
           e.stopPropagation();
-          alert('Delete ah deyyyyyyyy');
+          deleteLink(boardId, link.id);
         }}
       >
         <img src='/icons/delete.svg' />

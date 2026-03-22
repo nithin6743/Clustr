@@ -2,7 +2,7 @@ import styles from './Boards.module.css';
 import Board from './Board';
 import { useEffect, useRef } from 'react';
 
-function Boards({ boards, addLink }) {
+function Boards({ boards, addLink, deleteLink }) {
   const boardsRef = useRef(null);
 
   const resizeAll = () => {
@@ -37,6 +37,7 @@ function Boards({ boards, addLink }) {
           board={board}
           addLink={addLink}
           triggerResize={resizeAll}
+          deleteLink={deleteLink}
         />
       ))}
     </div>
