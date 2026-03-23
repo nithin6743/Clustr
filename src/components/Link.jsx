@@ -1,4 +1,5 @@
 import styles from './Board.module.css';
+
 function Link({ link, deleteLink, boardId }) {
   return (
     <div className={styles.links}>

@@ -60,7 +60,13 @@ function Board({ board, addLink, triggerResize, deleteLink }) {
         ))}
       </div>
       {showForm && (
-        <div className={styles.addLinkForm}>
+        <form
+          className={styles.addLinkForm}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleAddLink();
+          }}
+        >
           <input
             className={styles.addLinkTitle}
             placeholder='Title'
@@ -73,8 +79,8 @@ function Board({ board, addLink, triggerResize, deleteLink }) {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
           />
-          <button onClick={handleAddLink}>Add</button>
-        </div>
+          <button type='submit'>Add</button>
+        </form>
       )}
     </div>
   );

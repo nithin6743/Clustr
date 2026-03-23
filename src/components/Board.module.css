@@ -199,3 +199,51 @@ input:focus {
   outline: none;
   border: 1px solid aliceblue;
 }
+
+.refreshBoards,
+.addBoards {
+  padding: 8px;
+  background-color: rgba(97, 97, 97, 0.4);
+  backdrop-filter: blur(32px);
+  border: none;
+  border-radius: 50%;
+  margin: 0;
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+}
+
+.refreshBoards:hover {
+  background-color: rgba(97, 97, 97, 0.7);
+}
+.addBoards:hover {
+  background-color: rgba(97, 97, 97, 0.7);
+}
+
+.refreshBoards {
+  position: fixed;
+  bottom: 48px;
+  left: 48px;
+}
+
+.addBoards {
+  position: fixed;
+  bottom: 48px;
+  right: 48px;
+}
+
+.refreshBoards img,
+.addBoards img {
+  height: 32px;
+  width: 32px;
+}
+
+.footer {
+  width: 97%;
+  display: flex;
+  justify-content: space-between;
+}

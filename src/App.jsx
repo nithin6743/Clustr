@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Boards from './components/Boards';
 import Clock from './components/Clock';
+import Footer from './components/Footer';
 
 function App() {
   const defaultBoards = [
@@ -37,7 +38,7 @@ function App() {
     );
   }
 
-  function deleteLink( boardId, linkId ) {
+  function deleteLink(boardId, linkId) {
     setBoards((prev) =>
       prev.map((board) =>
         board.id === boardId
@@ -56,6 +57,7 @@ function App() {
         <Clock />
       </div>
       <Boards boards={boards} addLink={addLink} deleteLink={deleteLink} />
+      <Footer/>
     </div>
   );
 }
