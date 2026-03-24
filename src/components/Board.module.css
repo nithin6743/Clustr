@@ -13,6 +13,26 @@
   margin-bottom: 0;
 }
 
+.boards {
+  display: grid;
+  grid-template-columns: repeat(4, 324px);
+  grid-auto-rows: auto;
+  gap: 24px;
+  justify-content: center;
+}
+
+.time {
+  height: 100px;
+  margin-top: 0px;
+  font-size: 3rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(30px);
+  border-bottom: 1px solid rgba(157, 157, 157, 0.193);
+}
+
 .boardHeader {
   width: 100%;
   display: flex;
@@ -247,3 +267,71 @@ input:focus {
   display: flex;
   justify-content: space-between;
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 999;
+}
+
+.modal {
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 12px;
+  width: 320px;
+  color: white;
+}
+
+.inputTitle {
+  width: 1005;
+  padding: 16px;
+  background-color: rgba(92, 92, 92, 0.3);
+  border: none;
+  color: white;
+  border-radius: 8px;
+}
+
+.addBoardForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.addBoardButtons,
+.deleteLinksButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.addBoardButtons button,
+.deleteLinksButtons button {
+  border-radius: 8px;
+  width: 49%;
+  height: 48px;
+  color: white;
+  background-color: #1e1e1e91;
+  border: solid;
+  border-color: rgba(159, 159, 159, 0.243);
+  border-width: 1px;
+}
+
+.addBoardButtons button:hover,
+.deleteLinksButtons button:hover {
+  cursor: pointer;
+  background-color: rgba(51, 51, 51, 0.5);
+}
+
+
+
+

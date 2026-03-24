@@ -3,8 +3,12 @@ import './App.css';
 import Boards from './components/Boards';
 import Clock from './components/Clock';
 import Footer from './components/Footer';
+import Modal from './components/Modal';
+import DeleteLinkWarning from './components/DeleteLinkWarning';
+import AddBoardForm from './components/AddBoardForm';
 
 function App() {
+  const [modal, setModal] = useState(null);
   const defaultBoards = [
     {
       id: 1,
@@ -51,13 +55,44 @@ function App() {
     );
   }
 
+  function addBoard(title) {
+    if (!title) return;
+
+    const newBoard = {
+      id: Date.now(),
+      title: title,
+      links: [],
+    };
+    setBoards((prev) => [...prev, newBoard]);
+  }
+
   return (
     <div className='app'>
       <div className='clock'>
         <Clock />
       </div>
-      <Boards boards={boards} addLink={addLink} deleteLink={deleteLink} />
-      <Footer/>
+      <Boards
+        boards={boards}
+        addLink={addLink}
+        deleteLink={deleteLink}
+        setModal={setModal}
+      />
+      <Footer setModal={setModal} />
+      {modal && (
+        <Modal closeModal={() => setModal(null)}>
+          {modal.type === 'deleteLink' && (
+            <DeleteLinkWarning
+              setModal={setModal}
+              modal={modal}
+              deleteLink={deleteLink}
+            />
+          )}
+
+          {modal.type === 'addBoard' && (
+            <AddBoardForm addBoard={addBoard} setModal={setModal} />
+          )}
+        </Modal>
+      )}
     </div>
   );
 }

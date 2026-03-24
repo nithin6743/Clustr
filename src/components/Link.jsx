@@ -1,6 +1,6 @@
 import styles from './Board.module.css';
 
-function Link({ link, deleteLink, boardId }) {
+function Link({ link, deleteLink, boardId, setModal }) {
   return (
     <div className={styles.links}>
       <a href={link.url} className={styles.linkContent}>
@@ -11,7 +11,10 @@ function Link({ link, deleteLink, boardId }) {
         className={styles.deleteLink}
         onClick={(e) => {
           e.stopPropagation();
-          deleteLink(boardId, link.id);
+          setModal({
+            type: 'deleteLink',
+            data: { boardId, linkId: link.id },
+          });
         }}
       >
         <img src='/icons/delete.svg' />

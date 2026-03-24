@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './Board.module.css';
 import Link from './Link';
 
-function Board({ board, addLink, triggerResize, deleteLink }) {
+function Board({ board, addLink, triggerResize, deleteLink, setModal }) {
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
@@ -56,6 +56,7 @@ function Board({ board, addLink, triggerResize, deleteLink }) {
             key={link.id}
             deleteLink={deleteLink}
             boardId={board.id}
+            setModal={setModal}
           />
         ))}
       </div>
