@@ -70,6 +70,16 @@ function App() {
     setBoards((prev) => prev.filter((board) => board.id !== boardId));
   }
 
+  function updateBoardTitle(boardId, newTitle) {
+    if (!newTitle.trim()) return;
+
+    setBoards((prev) =>
+      prev.map((board) =>
+        board.id === boardId ? { ...board, title: newTitle } : board
+      )
+    );
+  }
+
   return (
     <div className='app'>
       <div className='clock'>
@@ -80,6 +90,7 @@ function App() {
         addLink={addLink}
         deleteLink={deleteLink}
         setModal={setModal}
+        updateBoardTitle={updateBoardTitle}
       />
       <Footer setModal={setModal} />
       {modal && (

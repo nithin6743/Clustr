@@ -332,3 +332,16 @@ input:focus {
   cursor: pointer;
   background-color: rgba(51, 51, 51, 0.5);
 }
+
+.editInput {
+  font-size: 20px;
+  padding: 4px;
+  width: 200px;
+  margin: 10px 0px 8px 0px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  align-items: center;
+  color: white;
+  outline: none;
+}

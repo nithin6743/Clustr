@@ -17,7 +17,11 @@ function AddBoardForm({ addBoard, setModal }) {
         placeholder='Board name'
       />
       <div className={styles.addBoardButtons}>
-        <button className={styles.redButton} onClick={() => setModal(null)}>
+        <button
+          type='button'
+          className={styles.redButton}
+          onClick={() => setModal(null)}
+        >
           Cancel
         </button>
         <button type='submit'>Add</button>

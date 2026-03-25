@@ -2,10 +2,19 @@ import { useState } from 'react';
 import styles from './Board.module.css';
 import Link from './Link';
 
-function Board({ board, addLink, triggerResize, deleteLink, setModal }) {
+function Board({
+  board,
+  addLink,
+  triggerResize,
+  deleteLink,
+  setModal,
+  updateBoardTitle,
+}) {
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+  const [newTitle, setNewTitle] = useState('');
 
   function handleAddLink() {
     if (!title || !url) return;
@@ -27,11 +36,43 @@ function Board({ board, addLink, triggerResize, deleteLink, setModal }) {
     <div className={styles.board}>
       <div className={styles.boardContent}>
         <div className={styles.boardHeader}>
-          <h3 className={styles.boardTitle}>{board.title}</h3>
+          {isEditing ? (
+            <input
+              className={styles.editInput}
+              value={newTitle}
+              autoFocus
+              onChange={(e) => setNewTitle(e.target.value)}
+              onBlur={() => {
+                updateBoardTitle(board.id, newTitle.trim());
+                setIsEditing(false);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  updateBoardTitle(board.id, newTitle.trim());
+                  setIsEditing(false);
+                }
+                if (e.key === 'Escape') {
+                  setNewTitle(board.title);
+                  setIsEditing(false);
+                }
+              }}
+            />
+          ) : (
+            <h3 className={styles.boardTitle}>{board.title}</h3>
+          )}
+
           <div className={styles.titleActions}>
-            <button className={styles.boardEdit}>
-              <img src='/icons/edit.svg' />
-            </button>
+            {!isEditing && (
+              <button
+                className={styles.boardEdit}
+                onClick={() => {
+                  setNewTitle(board.title);
+                  setIsEditing(true);
+                }}
+              >
+                <img src='/icons/edit.svg' />
+              </button>
+            )}
             <button
               className={styles.addLink}
               onClick={() => {
