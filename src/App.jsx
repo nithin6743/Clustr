@@ -4,7 +4,7 @@ import Boards from './components/Boards';
 import Clock from './components/Clock';
 import Footer from './components/Footer';
 import Modal from './components/Modal';
-import DeleteLinkWarning from './components/DeleteLinkWarning';
+import DeleteWarning from './components/DeleteWarning';
 import AddBoardForm from './components/AddBoardForm';
 
 function App() {
@@ -66,6 +66,10 @@ function App() {
     setBoards((prev) => [...prev, newBoard]);
   }
 
+  function deleteBoard(boardId) {
+    setBoards((prev) => prev.filter((board) => board.id !== boardId));
+  }
+
   return (
     <div className='app'>
       <div className='clock'>
@@ -81,11 +85,24 @@ function App() {
       {modal && (
         <Modal closeModal={() => setModal(null)}>
           {modal.type === 'deleteLink' && (
-            <DeleteLinkWarning
+            <DeleteWarning
               setModal={setModal}
               modal={modal}
               deleteLink={deleteLink}
-            />
+              deleteBoard={deleteBoard}
+            >
+              Delete Link?
+            </DeleteWarning>
+          )}
+          {modal.type === 'deleteBoard' && (
+            <DeleteWarning
+              setModal={setModal}
+              modal={modal}
+              deleteLink={deleteLink}
+              deleteBoard={deleteBoard}
+            >
+              Delete Board?
+            </DeleteWarning>
           )}
 
           {modal.type === 'addBoard' && (

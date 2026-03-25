@@ -44,7 +44,15 @@ function Board({ board, addLink, triggerResize, deleteLink, setModal }) {
             >
               <img src='/icons/link.svg' />
             </button>
-            <button className={styles.boardDelete}>
+            <button
+              className={styles.boardDelete}
+              onClick={() => {
+                setModal({
+                  type: 'deleteBoard',
+                  data: { boardId: board.id },
+                });
+              }}
+            >
               <img src='/icons/delete.svg' />
             </button>
           </div>

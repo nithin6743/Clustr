@@ -310,13 +310,13 @@ input:focus {
 }
 
 .addBoardButtons,
-.deleteLinksButtons {
+.deleteButtons {
   display: flex;
   justify-content: space-between;
 }
 
 .addBoardButtons button,
-.deleteLinksButtons button {
+.deleteButtons button {
   border-radius: 8px;
   width: 49%;
   height: 48px;
@@ -328,7 +328,7 @@ input:focus {
 }
 
 .addBoardButtons button:hover,
-.deleteLinksButtons button:hover {
+.deleteButtons button:hover {
   cursor: pointer;
   background-color: rgba(51, 51, 51, 0.5);
 }

@@ -1,6 +1,6 @@
 import styles from './Board.module.css';
 
-function Link({ link, deleteLink, boardId, setModal }) {
+function Link({ link, boardId, setModal }) {
   return (
     <div className={styles.links}>
       <a href={link.url} className={styles.linkContent}>
