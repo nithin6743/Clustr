@@ -349,12 +349,29 @@ input:focus {
 
 .welcomeCard {
   padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .welcomeTitle {
   font-size: 32px;
+  line-height: 0px;
 }
 
 .welcomeContent {
   line-height: 24px;
+}
+
+.continueButton {
+  border-radius: 8px;
+  width: 49%;
+  height: 48px;
+  color: white;
+  background-color: #1e1e1e91;
+  border: solid;
+  border-color: rgba(159, 159, 159, 0.243);
+  border-width: 1px;
 }
