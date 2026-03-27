@@ -11,16 +11,10 @@ function App() {
   const [modal, setModal] = useState(null);
   const defaultBoards = [
     {
-      id: 1,
+      id: 'imported',
       title: 'Bookmarks',
-      links: [
-        {
-          id: 1,
-          title: 'Youtube',
-          url: 'https://youtube.com',
-          favicon: '...',
-        },
-      ],
+      links: [],
+      isSystem: true,
     },
     // rest of your data...
   ];
@@ -80,6 +74,39 @@ function App() {
     );
   }
 
+  function extractLinks(nodes) {
+    let links = [];
+
+    nodes.forEach((node) => {
+      if (node.url) {
+        links.push({
+          id: Number(node.id),
+          title: node.title,
+          url: node.url,
+          favicon: `https://www.google.com/s2/favicons?domain=${node.url}`,
+        });
+      }
+
+      if (node.children) {
+        links = links.concat(extractLinks(node.children));
+      }
+    });
+
+    return links;
+  }
+
+  function importBookmarks() {
+    chrome.bookmarks.getTree((tree) => {
+      const links = extractLinks(tree);
+
+      setBoards((prev) =>
+        prev.map((board) =>
+          board.id === 'imported' ? { ...board, links } : board
+        )
+      );
+    });
+  }
+
   return (
     <div className='app'>
       <div className='clock'>
@@ -92,7 +119,7 @@ function App() {
         setModal={setModal}
         updateBoardTitle={updateBoardTitle}
       />
-      <Footer setModal={setModal} />
+      <Footer setModal={setModal} importBookmarks={importBookmarks} />
       {modal && (
         <Modal closeModal={() => setModal(null)}>
           {modal.type === 'deleteLink' && (

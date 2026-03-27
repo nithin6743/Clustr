@@ -62,7 +62,7 @@ function Board({
           )}
 
           <div className={styles.titleActions}>
-            {!isEditing && (
+            {!isEditing && board.id !== 'imported' && (
               <button
                 className={styles.boardEdit}
                 onClick={() => {
@@ -85,17 +85,19 @@ function Board({
             >
               <img src='/icons/link.svg' />
             </button>
-            <button
-              className={styles.boardDelete}
-              onClick={() => {
-                setModal({
-                  type: 'deleteBoard',
-                  data: { boardId: board.id },
-                });
-              }}
-            >
-              <img src='/icons/delete.svg' />
-            </button>
+            {board.id !== 'imported' && (
+              <button
+                className={styles.boardDelete}
+                onClick={() => {
+                  setModal({
+                    type: 'deleteBoard',
+                    data: { boardId: board.id },
+                  });
+                }}
+              >
+                <img src='/icons/delete.svg' />
+              </button>
+            )}
           </div>
         </div>
 

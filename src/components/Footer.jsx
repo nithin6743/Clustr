@@ -1,9 +1,9 @@
 import styles from './Board.module.css';
 
-function Footer({ setModal }) {
+function Footer({ setModal, importBookmarks }) {
   return (
     <footer className={styles.footer}>
-      <button className={styles.refreshBoards}>
+      <button className={styles.refreshBoards} onClick={importBookmarks}>
         <img src='/icons/refresh.svg' />
       </button>
       <button
