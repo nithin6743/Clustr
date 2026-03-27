@@ -6,8 +6,13 @@ import Footer from './components/Footer';
 import Modal from './components/Modal';
 import DeleteWarning from './components/DeleteWarning';
 import AddBoardForm from './components/AddBoardForm';
+import Welcome from './components/Welcome';
 
 function App() {
+  const [isFirstLaunch, setIsFirstLaunch] = useState(
+    () => !localStorage.getItem('hasLaunched')
+  );
+
   const [modal, setModal] = useState(null);
   const defaultBoards = [
     {
@@ -22,7 +27,26 @@ function App() {
   const [boards, setBoards] = useState(() => {
     const saved = localStorage.getItem('boards');
 
-    return saved ? JSON.parse(saved) : defaultBoards;
+    const parsed = saved ? JSON.parse(saved) : [];
+
+    const safeBoards = parsed.map((b) => ({
+      ...b,
+      links: b.links || [],
+    }));
+
+    const hasImported = safeBoards.some((b) => b.id === 'imported');
+
+    return hasImported
+      ? safeBoards
+      : [
+          {
+            id: 'imported',
+            title: 'Bookmarks',
+            links: [],
+            isSystem: true,
+          },
+          ...safeBoards,
+        ];
   });
   useEffect(() => {
     localStorage.setItem('boards', JSON.stringify(boards));
@@ -101,11 +125,19 @@ function App() {
 
       setBoards((prev) =>
         prev.map((board) =>
-          board.id === 'imported' ? { ...board, links } : board
+          board.id === 'imported' ? { ...board, links: links || [] } : board
         )
       );
     });
   }
+
+  useEffect(() => {
+    if (isFirstLaunch) {
+      importBookmarks();
+      localStorage.setItem('hasLaunched', 'true');
+      setModal({ type: 'welcome' });
+    }
+  }, [isFirstLaunch]);
 
   return (
     <div className='app'>
@@ -121,7 +153,7 @@ function App() {
       />
       <Footer setModal={setModal} importBookmarks={importBookmarks} />
       {modal && (
-        <Modal closeModal={() => setModal(null)}>
+        <Modal closeModal={() => setModal(null)} modal={modal}>
           {modal.type === 'deleteLink' && (
             <DeleteWarning
               setModal={setModal}
@@ -146,6 +178,8 @@ function App() {
           {modal.type === 'addBoard' && (
             <AddBoardForm addBoard={addBoard} setModal={setModal} />
           )}
+
+          {modal.type === 'welcome' && <Welcome setModal={setModal} />}
         </Modal>
       )}
     </div>
