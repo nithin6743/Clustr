@@ -375,3 +375,7 @@ input:focus {
   border-color: rgba(159, 159, 159, 0.243);
   border-width: 1px;
 }
+
+.dragHandle:hover {
+  cursor: grab;
+}

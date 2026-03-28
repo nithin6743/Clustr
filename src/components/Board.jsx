@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styles from './Board.module.css';
 import Link from './Link';
+import { useDroppable } from '@dnd-kit/core';
 
 function Board({
   board,
@@ -15,6 +16,9 @@ function Board({
   const [url, setUrl] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState('');
+  const { setNodeRef } = useDroppable({
+    id: board.id,
+  });
 
   function handleAddLink() {
     if (!title || !url) return;
@@ -33,7 +37,7 @@ function Board({
   }
 
   return (
-    <div className={styles.board}>
+    <div ref={setNodeRef} className={styles.board}>
       <div className={styles.boardContent}>
         <div className={styles.boardHeader}>
           {isEditing ? (

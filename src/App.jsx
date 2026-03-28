@@ -7,8 +7,10 @@ import Modal from './components/Modal';
 import DeleteWarning from './components/DeleteWarning';
 import AddBoardForm from './components/AddBoardForm';
 import Welcome from './components/Welcome';
+import { DndContext, DragOverlay } from '@dnd-kit/core';
 
 function App() {
+  const [activeLink, setActiveLink] = useState(null);
   const [isFirstLaunch, setIsFirstLaunch] = useState(
     () => !localStorage.getItem('hasLaunched')
   );
@@ -131,6 +133,93 @@ function App() {
     });
   }
 
+  function handleDragEnd(event) {
+    const { active, over } = event;
+    if (!over) return;
+
+    const sourceBoardId = active.data.current.boardId;
+    const linkId = active.id;
+
+    setBoards((prev) => {
+      let movedLink = null;
+
+      // 1. REMOVE from source board
+      const temp = prev.map((board) => {
+        if (board.id === sourceBoardId) {
+          const filtered = board.links.filter((l) => {
+            if (l.id === linkId) {
+              movedLink = l;
+              return false;
+            }
+            return true;
+          });
+          return { ...board, links: filtered };
+        }
+        return board;
+      });
+
+      // safety: if somehow not found → abort
+      if (!movedLink) return prev;
+
+      let targetBoardId = null;
+      let targetIndex = null;
+
+      // 2. FIND target board + base index
+      for (const board of temp) {
+        const index = board.links.findIndex((l) => l.id === over.id);
+
+        // CASE 1 → dropped on a link
+        if (index !== -1) {
+          targetBoardId = board.id;
+          targetIndex = index;
+          break;
+        }
+
+        // CASE 2 → dropped on board itself
+        if (board.id === over.id) {
+          targetBoardId = board.id;
+          targetIndex = board.links.length;
+        }
+      }
+
+      // safety fallback (prevents disappearing bug)
+      if (targetBoardId === null) return prev;
+
+      // 3. INSERT into correct position
+      return temp.map((board) => {
+        if (board.id !== targetBoardId) return board;
+
+        const newLinks = [...board.links];
+
+        let insertIndex = targetIndex;
+
+        // 🎯 POSITION LOGIC (top vs bottom)
+        const overRect = over.rect;
+        const activeRect = active.rect.current.translated;
+
+        if (
+          targetIndex !== null &&
+          overRect &&
+          activeRect &&
+          targetIndex < newLinks.length
+        ) {
+          const isBelow = activeRect.top > overRect.top + overRect.height / 2;
+
+          if (isBelow) {
+            insertIndex = targetIndex + 1;
+          }
+        }
+
+        // prevent overflow
+        insertIndex = Math.min(insertIndex, newLinks.length);
+
+        newLinks.splice(insertIndex, 0, movedLink);
+
+        return { ...board, links: newLinks };
+      });
+    });
+  }
+
   useEffect(() => {
     if (isFirstLaunch) {
       importBookmarks();
@@ -144,13 +233,39 @@ function App() {
       <div className='clock'>
         <Clock />
       </div>
-      <Boards
-        boards={boards}
-        addLink={addLink}
-        deleteLink={deleteLink}
-        setModal={setModal}
-        updateBoardTitle={updateBoardTitle}
-      />
+      <DndContext
+        onDragStart={(event) => {
+          const { active } = event;
+
+          const sourceBoardId = active.data.current.boardId;
+          const linkId = active.id;
+
+          const sourceBoard = boards.find((b) => b.id === sourceBoardId);
+          const link = sourceBoard.links.find((l) => l.id === linkId);
+
+          setActiveLink(link);
+        }}
+        onDragEnd={(event) => {
+          handleDragEnd(event);
+          setActiveLink(null);
+        }}
+      >
+        <Boards
+          boards={boards}
+          addLink={addLink}
+          deleteLink={deleteLink}
+          setModal={setModal}
+          updateBoardTitle={updateBoardTitle}
+        />
+        <DragOverlay>
+          {activeLink ? (
+            <div className='dragOverlay'>
+              <img src={activeLink.favicon} />
+              <span>{activeLink.title}</span>
+            </div>
+          ) : null}
+        </DragOverlay>
+      </DndContext>
       <Footer setModal={setModal} importBookmarks={importBookmarks} />
       {modal && (
         <Modal closeModal={() => setModal(null)} modal={modal}>
