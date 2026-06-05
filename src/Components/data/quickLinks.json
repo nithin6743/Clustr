@@ -1,0 +1,72 @@
+[
+  {
+    "id": "behance",
+    "name": "Behance",
+    "url": "https://www.behance.net",
+    "icon": "/icons/behance.jpeg  ",
+    "visible": true
+  },
+  {
+    "id": "chatgpt",
+    "name": "ChatGPT",
+    "url": "https://chatgpt.com",
+    "icon": "/icons/chatgpt.jpeg  ",
+    "visible": true
+  },
+  {
+    "id": "google-photos",
+    "name": "Google Photos",
+    "url": "https://photos.google.com",
+    "icon": "/icons/google-photos.jpeg  ",
+    "visible": true
+  },
+  {
+    "id": "gmail",
+    "name": "Gmail",
+    "url": "https://mail.google.com",
+    "icon": "/icons/gmail.jpeg  ",
+    "visible": true
+  },
+  {
+    "id": "youtube",
+    "name": "YouTube",
+    "url": "https://www.youtube.com",
+    "icon": "/icons/youtube.jpeg  ",
+    "visible": true
+  },
+  {
+    "id": "google-keep",
+    "name": "Google Keep",
+    "url": "https://keep.google.com",
+    "icon": "/icons/google-keep.jpeg  ",
+    "visible": true
+  },
+  {
+    "id": "google-drive",
+    "name": "Google Drive",
+    "url": "https://drive.google.com",
+    "icon": "/icons/google-drive.jpeg ",
+    "visible": true
+  },
+  {
+    "id": "google-meet",
+    "name": "Google Meet",
+    "url": "https://meet.google.com",
+    "icon": "/icons/google-meet.jpeg  ",
+    "visible": true
+  },
+  {
+    "id": "github",
+    "name": "GitHub",
+    "url": "https://github.com",
+    "icon": "/icons/github.jpeg ",
+    "visible": true
+  },
+  {
+    "id": "linkedin",
+    "name": "LinkedIn",
+    "url": "https://www.linkedin.com",
+    "icon": "/icons/linkedin.jpeg ",
+    "visible": true
+  }
+]
