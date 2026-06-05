@@ -3,7 +3,7 @@ import './index.css';
 import TopBar from './Components/TopBar.jsx';
 
 function App() {
-  const [bg, setBg] = useState(true);
+  const [bg, setBg] = useState(false);
 
   return (
     <>
