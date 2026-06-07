@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './index.css';
 import TopBar from './Components/TopBar.jsx';
+import Boards from './Components/Boards.jsx';
 
 function App() {
   const [bg, setBg] = useState(false);
@@ -28,6 +29,7 @@ function App() {
       </div> */}
       <div className='App'>
         <TopBar />
+        <Boards/>
       </div>
     </>
   );
