@@ -7,13 +7,15 @@ export default function Boards() {
       <div className={`${styles.col1}`}>
         <Board />
         <Board />
+        <Board />
       </div>
       <div className={`${styles.col2}`}>
         <Board />
         <Board />
-        <Board />
+        
       </div>
       <div className={`${styles.col3}`}>
+        <Board />
         <Board />
       </div>
       <div className={`${styles.col4}`}>

@@ -5,10 +5,16 @@
   border-radius: 10px;
   padding: 0 0.5rem;
 }
+.boardTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 0.4rem;
+}
 
 .boardTitle {
-  /* padding: 0rem 1rem; */
-  margin: 1rem 1rem 0 1rem;
+  margin: 1rem 0.25rem 0 0.25rem;
   font-size: 1.5rem;
   color: #ffffff;
 }
@@ -16,22 +22,63 @@
 .boardTitle::after {
   content: '';
   display: block;
-  width: 100%;
+  width: 390%;
   height: 2px;
   background-color: #ffffff;
   margin-top: 0.5rem;
 }
 
-
-.link{
-    text-decoration: none;
-    color: inherit;
+.addIcon,
+.editIcon,
+.deleteIcon {
+  padding: 0.5rem;
+  background-color: transparent;
+  border: none;
+}
+.addIcon:hover,
+.editIcon:hover,
+.deleteIcon:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
 }
 
-.links{
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    margin: 0 1rem 1rem 1rem;
+.boardIcons {
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.125s ease;
+}
+.board:hover .boardIcons {
+  opacity: 1;
+}
 
+.link {
+  text-decoration: none;
+  color: white;
+  padding: 0 0 0 0.25rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0 0.25rem 1rem 0.25rem;
+}
+
+.linkIcons{
+  opacity: 0;
+  transition: opacity 0.125s ease;
+}
+
+.link:hover .linkIcons {
+  opacity: 1;
 }
