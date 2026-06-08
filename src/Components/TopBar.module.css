@@ -51,16 +51,14 @@
 .quickLinks {
   display: flex;
   justify-content: space-between;
-  width: 50%;
-  gap: auto;
+  width: 60%;
   padding-top: 0.5rem;
 }
 
 .actions {
   display: flex;
   justify-content: space-between;
-  gap: auto;
-  width: 16%;
+  width: 8%;
   align-items: right;
 }
 
