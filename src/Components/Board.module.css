@@ -14,17 +14,17 @@
 }
 
 .boardTitle {
-  margin: 1rem 0.25rem 0 0.25rem;
-  font-size: 1.5rem;
+  margin: 0.25rem 0.25rem -0.2rem 0.5rem;
+  font-size: 1rem;
   color: #ffffff;
 }
 
-.boardTitle::after {
+.boardBox::after {
   content: '';
   display: block;
-  width: 390%;
+  width: 100%;
   height: 2px;
-  background-color: #ffffff;
+  background-color: #ffffff88;
   margin-top: 0.5rem;
 }
 
@@ -40,7 +40,7 @@
 .deleteIcon:hover {
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 .boardIcons {
@@ -48,23 +48,10 @@
   gap: 0.5rem;
   opacity: 0;
   transition: opacity 0.125s ease;
+  margin-top: 0.25rem;
 }
 .board:hover .boardIcons {
   opacity: 1;
-}
-
-.link {
-  text-decoration: none;
-  color: white;
-  padding: 0 0 0 0.25rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.link:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
 }
 
 .links {
@@ -72,13 +59,4 @@
   flex-direction: column;
   gap: 0.25rem;
   margin: 0 0.25rem 1rem 0.25rem;
-}
-
-.linkIcons{
-  opacity: 0;
-  transition: opacity 0.125s ease;
-}
-
-.link:hover .linkIcons {
-  opacity: 1;
 }

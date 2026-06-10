@@ -1,0 +1,313 @@
+[
+  {
+    "id": "imported",
+    "title": "Bookmarks",
+    "column": "col1",
+    "position": 1,
+    "links": [
+      {
+        "id": 51,
+        "title": "Gmail",
+        "url": "https://mail.google.com/mail/u/0/#inbox",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://mail.google.com/mail/u/0/#inbox"
+      },
+      {
+        "id": 50,
+        "title": "ChatGPT",
+        "url": "https://chatgpt.com/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://chatgpt.com/"
+      },
+      {
+        "id": 4,
+        "title": "Perplexity",
+        "url": "https://www.perplexity.ai/?login-source=floatingSignup&login-new=false",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://www.perplexity.ai/?login-source=floatingSignup&login-new=false"
+      },
+      {
+        "id": 67,
+        "title": "Passport Seva",
+        "url": "https://www.passportindia.gov.in/psp",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://www.passportindia.gov.in/psp"
+      },
+      {
+        "id": 66,
+        "title": "PreLogin",
+        "url": "https://services2.passportindia.gov.in/forms/PreLogin",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://services2.passportindia.gov.in/forms/PreLogin"
+      },
+      {
+        "id": 64,
+        "title": "myAadhaar",
+        "url": "https://myaadhaar.uidai.gov.in/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://myaadhaar.uidai.gov.in/"
+      },
+      {
+        "id": 95,
+        "title": "Remotasks Community",
+        "url": "https://community.remotasks.com/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://community.remotasks.com/"
+      },
+      {
+        "id": 92,
+        "title": "Earn your first dollar online with Gumroad",
+        "url": "https://gumroad.com/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://gumroad.com/"
+      },
+      {
+        "id": 88,
+        "title": "Humanize AI",
+        "url": "https://www.humanizeai.pro/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://www.humanizeai.pro/"
+      },
+      {
+        "id": 103,
+        "title": "Learn Touch Typing Free - TypingClub",
+        "url": "https://www.typingclub.com/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://www.typingclub.com/"
+      },
+      {
+        "id": 118,
+        "title": "Payhip - Create a free website and sell online",
+        "url": "https://payhip.com/?utm_source=chatgpt.com",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://payhip.com/?utm_source=chatgpt.com"
+      }
+    ],
+    "isSystem": true
+  },
+  {
+    "id": 1774678713750,
+    "title": "Design",
+    "column": "col2",
+    "position": 1,
+    "links": [
+      {
+        "id": 80,
+        "title": "Figma React Freelancing",
+        "url": "https://chatgpt.com/g/g-p-69897df0220881918941dd0d20319fe4-current/c/69940f3a-d764-8321-bc4d-0570228a0bd2",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://chatgpt.com/g/g-p-69897df0220881918941dd0d20319fe4-current/c/69940f3a-d764-8321-bc4d-0570228a0bd2"
+      },
+      {
+        "id": 15,
+        "title": "Free Fonts",
+        "url": "https://befonts.com/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://befonts.com/"
+      },
+      {
+        "id": 19,
+        "title": "Hamish Williams | Designer + Developer",
+        "url": "https://hamishw.com/#intro",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://hamishw.com/#intro"
+      },
+      {
+        "id": 72,
+        "title": "https://www.awwwards.com/",
+        "url": "https://www.awwwards.com/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://www.awwwards.com/"
+      },
+      {
+        "id": 71,
+        "title": "Free Icons & Stock Photos",
+        "url": "https://thenounproject.com/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://thenounproject.com/"
+      },
+      {
+        "id": 1777527374136,
+        "title": "supahero",
+        "url": "https://supahero.io/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://supahero.io/"
+      },
+      {
+        "id": 107,
+        "title": "Cuturila Font › Fontesk",
+        "url": "https://fontesk.com/cuturila-font/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://fontesk.com/cuturila-font/"
+      },
+      {
+        "id": 111,
+        "title": "Supahero - Website hero section library",
+        "url": "https://supahero.io/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://supahero.io/"
+      }
+    ]
+  },
+  {
+    "id": 1774678723898,
+    "title": "College",
+    "column": "col3",
+    "position": 1,
+    "links": [
+      {
+        "id": 1774707207475,
+        "title": "Google Skills",
+        "url": "https://www.skills.google/paths/420",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://www.skills.google/paths/420"
+      },
+      {
+        "id": 20,
+        "title": "Resume | FlowCV",
+        "url": "https://app.flowcv.com/resume/content",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://app.flowcv.com/resume/content"
+      },
+      {
+        "id": 98,
+        "title": "Superset",
+        "url": "https://app.joinsuperset.com/students",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://app.joinsuperset.com/students"
+      },
+      {
+        "id": 84,
+        "title": "Login | POD",
+        "url": "https://app.pod.ai/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://app.pod.ai/"
+      }
+    ]
+  },
+  {
+    "id": 1774678727029,
+    "title": "Dev",
+    "column": "col4",
+    "position": 1,
+    "links": [
+      {
+        "id": 86,
+        "title": "Full stack dev map",
+        "url": "https://chatgpt.com/c/69a29671-5294-83ab-80b4-88dec8bb791b",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://chatgpt.com/c/69a29671-5294-83ab-80b4-88dec8bb791b"
+      },
+      {
+        "id": 6,
+        "title": "CMREC-2026-P3 | Report | Smart Interviews",
+        "url": "https://smartinterviews.in/report/CMREC-2026-P3",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://smartinterviews.in/report/CMREC-2026-P3"
+      },
+      {
+        "id": 14,
+        "title": "Strivers A2Z DSA Course/Sheet",
+        "url": "https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2"
+      },
+      {
+        "id": 41,
+        "title": "React Bits - Animated UI Components For React",
+        "url": "https://reactbits.dev/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://reactbits.dev/"
+      },
+      {
+        "id": 1779174856372,
+        "title": "IdeOne",
+        "url": "https://ideone.com/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://ideone.com/"
+      }
+    ]
+  },
+  {
+    "id": 1774678741913,
+    "title": "Entertainment",
+    "column": "col3",
+    "position": 2,
+    "links": [
+      {
+        "id": 1780544055349,
+        "title": "Netmirror Home",
+        "url": "https://net11.cc/home",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://net11.cc/home"
+      },
+      {
+        "id": 44,
+        "title": "FitGirl Repacks",
+        "url": "https://fitgirl-repacks.site/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://fitgirl-repacks.site/"
+      },
+      {
+        "id": 1779174747764,
+        "title": "Noxx TV",
+        "url": "https://noxx.to/tv/modern-family/5/16",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://noxx.to/tv/modern-family/5/16"
+      },
+      {
+        "id": 100,
+        "title": "TerraInk: The Cartographic Poster Engine",
+        "url": "https://terraink.app/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://terraink.app/"
+      }
+    ]
+  },
+  {
+    "id": 1774678748283,
+    "title": "Game Dev",
+    "column": "col4",
+    "position": 2,
+    "links": [
+      {
+        "id": 62,
+        "title": "Unreal Engine 5 Tutorial for Beginners: Getting Started | Kodeco",
+        "url": "https://www.kodeco.com/31800833-unreal-engine-5-tutorial-for-beginners-getting-started#toc-anchor-001",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://www.kodeco.com/31800833-unreal-engine-5-tutorial-for-beginners-getting-started#toc-anchor-001"
+      },
+      {
+        "id": 69,
+        "title": "Characters - Blender Studio",
+        "url": "https://studio.blender.org/characters/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://studio.blender.org/characters/"
+      },
+      {
+        "id": 46,
+        "title": "Unreal Engine 5: The Complete Beginner's Course | Udemy",
+        "url": "https://www.udemy.com/course/unreal-engine-5-the-complete-beginners-course/?couponCode=UDEAFFHP22025",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://www.udemy.com/course/unreal-engine-5-the-complete-beginners-course/?couponCode=UDEAFFHP22025"
+      }
+    ]
+  },
+  {
+    "id": 1774678752995,
+    "title": "Try it out",
+    "column": "col2",
+    "position": 2,
+    "links": [
+      {
+        "id": 29,
+        "title": "Learn Anything",
+        "url": "https://learn-anything.xyz/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://learn-anything.xyz/"
+      },
+      {
+        "id": 31,
+        "title": "TryHackMe",
+        "url": "https://tryhackme.com/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://tryhackme.com/"
+      },
+      {
+        "id": 32,
+        "title": "Hack The Box",
+        "url": "https://www.hackthebox.com/",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://www.hackthebox.com/"
+      },
+      {
+        "id": 94,
+        "title": "Airtm - Get Paid Better",
+        "url": "https://app.airtm.com/home",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://app.airtm.com/home"
+      },
+      {
+        "id": 9123434,
+        "title": "Varsh - love of my life",
+        "url": "https://static.vecteezy.com/system/resources/thumbnails/055/041/923/small/love-you-handwritten-on-a-piece-of-paper-wrinkly-paper-with-handwritten-love-note-and-heart-for-valentine-s-day-handwritten-romantic-message-for-valentine-photo.jpg",
+        "favicon": "./favicon_io/favicon-32x32.png"
+      }
+    ]
+  },
+  {
+    "id": 1780052508131,
+    "title": "Office",
+    "column": "col1",
+    "position": 2,
+    "links": [
+      {
+        "id": 1780052522958,
+        "title": "NSR ",
+        "url": "https://nationalskillsregistry.com/nasscom/pageflows/itp/itpTransactions/viewUpdateContactDetails.do?actionType=correction#",
+        "favicon": "https://www.google.com/s2/favicons?domain=https://nationalskillsregistry.com/nasscom/pageflows/itp/itpTransactions/viewUpdateContactDetails.do?actionType=correction#"
+      }
+    ]
+  }
+]

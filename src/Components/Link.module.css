@@ -1,0 +1,54 @@
+.link {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.linkAddress {
+  text-decoration: none;
+  color: white;
+  padding: 0.25rem 0 0.25rem 0.25rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 0.5rem;
+  align-items: center;
+  width: 70%;
+}
+
+.link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.linkIcons {
+  opacity: 0;
+  transition: opacity 0.125s ease;
+  margin-right: 0.25rem;
+}
+
+.link:hover .linkIcons {
+  opacity: 1;
+}
+
+.editIcon,
+.deleteIcon {
+  padding: 0.25rem 0.25rem 0.125rem 0.25rem;
+  background-color: transparent;
+  border: none;
+}
+
+.editIcon:hover,
+.deleteIcon:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.linkText {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

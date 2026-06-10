@@ -1,27 +1,34 @@
 import styles from './Boards.module.css';
 import Board from './Board';
 
-export default function Boards() {
+export default function Boards({ bookmarks }) {
+  const columns = {
+    col1: [],
+    col2: [],
+    col3: [],
+    col4: [],
+  };
+
+  bookmarks.forEach((board) => {
+    columns[board.column].push(board);
+  });
+
+  Object.values(columns).forEach((column) => {
+    column.sort((a, b) => a.position - b.position);
+  });
+
   return (
-    <div className={`${styles.boards}`}>
-      <div className={`${styles.col1}`}>
-        <Board />
-        <Board />
-        <Board />
-      </div>
-      <div className={`${styles.col2}`}>
-        <Board />
-        <Board />
-        
-      </div>
-      <div className={`${styles.col3}`}>
-        <Board />
-        <Board />
-      </div>
-      <div className={`${styles.col4}`}>
-        <Board />
-        <Board/>
-      </div>
+    <div className={styles.boards}>
+      {Object.entries(columns).map(([columnId, columnBoards]) => (
+        <div key={columnId} className={styles.column}>
+          {columnBoards.map((board) => (
+            <Board
+              key={board.id}
+              board={board}
+            />
+          ))}
+        </div>
+      ))}
     </div>
   );
 }
