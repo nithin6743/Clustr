@@ -1,7 +1,7 @@
 .backDrop {
   position: fixed;
   inset: 0;
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(32px);
   background: rgba(0, 0, 0, 0.233);
   z-index: 999;
 }
@@ -11,9 +11,10 @@
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
-  width: 700px;
+  width: 724px;
   z-index: 1000;
   animation: searchEnter 0.25s ease;
+
 }
 
 .results {
@@ -37,14 +38,13 @@
   align-items: center;
   padding: 1rem 4rem;
   scroll-behavior: smooth;
-  border-radius: 8px;
+  border-bottom: 0.1px solid rgba(255, 255, 255, 0.3);
 }
 
 .indieResult:hover {
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.2);
 }
-
 
 .searchInput {
   height: 56px;
