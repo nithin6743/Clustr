@@ -1,0 +1,17 @@
+.backDrop {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(40px);
+  background: rgba(0, 0, 0, 0.233);
+  z-index: 999;
+}
+
+.searchModal {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  z-index: 1000;
+  animation: searchEnter 0.25s ease;
+}

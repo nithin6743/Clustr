@@ -5,6 +5,9 @@ import Boards from './Components/Boards.jsx';
 import bookmarks from './Components/data/Bookmarks.json';
 import SearchModal from './Components/modals/SearchModal.jsx';
 
+import Modal from './Components/modals/Modal.jsx';
+import AddBoard from './Components/AddBoard.jsx';
+
 function App() {
   const [bg, setBg] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -68,6 +71,9 @@ function App() {
             setSearchOpen={setSearchOpen}
           />
         )}
+        <Modal>
+          <AddBoard />
+        </Modal>
       </div>
     </>
   );

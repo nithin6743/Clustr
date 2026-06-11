@@ -1,7 +1,7 @@
 .backDrop {
   position: fixed;
   inset: 0;
-  backdrop-filter: blur(32px);
+  backdrop-filter: blur(40px);
   background: rgba(0, 0, 0, 0.233);
   z-index: 999;
 }
