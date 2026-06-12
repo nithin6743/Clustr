@@ -1,7 +1,7 @@
 import styles from './Boards.module.css';
 import Board from './Board';
 
-export default function Boards({ bookmarks }) {
+export default function Boards({ boards }) {
   const columns = {
     col1: [],
     col2: [],
@@ -9,7 +9,7 @@ export default function Boards({ bookmarks }) {
     col4: [],
   };
 
-  bookmarks.forEach((board) => {
+  boards.forEach((board) => {
     columns[board.column].push(board);
   });
 
@@ -22,13 +22,11 @@ export default function Boards({ bookmarks }) {
       {Object.entries(columns).map(([columnId, columnBoards]) => (
         <div key={columnId} className={styles.column}>
           {columnBoards.map((board) => (
-            <Board
-              key={board.id}
-              board={board}
-            />
+            <Board key={board.id} board={board} />
           ))}
         </div>
       ))}
+      {console.log(columns.col1.length)}
     </div>
   );
 }

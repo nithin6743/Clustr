@@ -7,6 +7,7 @@ export default function TopBar({
   setSearchQuery,
   searchOpen,
   setSearchOpen,
+  setAddBoardButton,
 }) {
   return (
     <div className={styles.topBar}>
@@ -62,7 +63,10 @@ export default function TopBar({
           ))}
       </div>
       <div className={styles.actions}>
-        <button className={`${styles.actionButton} ${glass.glass}`}>
+        <button
+          className={`${styles.actionButton} ${glass.glass}`}
+          onClick={() => setAddBoardButton(true)}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='30px'

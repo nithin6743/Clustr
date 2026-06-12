@@ -1,0 +1,25 @@
+.addboardDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  padding: 24px 32px;
+}
+
+.addBoardTitle {
+  margin: 0 0 24px 0;
+  font-size: 28px;
+}
+
+.boardTitleInput {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-size: 24px;
+  background-color: transparent;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.boardTitleInput:focus {
+  border: 0.2px solid rgba(255, 255, 255, 0.4);
+}

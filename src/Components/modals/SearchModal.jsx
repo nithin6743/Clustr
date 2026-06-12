@@ -14,7 +14,7 @@ export default function SearchModal({
             onClick={(e) => e.stopPropagation()}
             //   className={`${styles.searchBar} ${glass.glass}`}
             onSubmit={(e) => {
-              (e.preventDefault(), alert('Search functionality coming soon!'));
+              e.preventDefault();
             }}
           >
             <input

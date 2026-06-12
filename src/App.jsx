@@ -12,6 +12,8 @@ function App() {
   const [bg, setBg] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
+  const [boards, setBoards] = useState(bookmarks);
+  const [addBoardButton, setAddBoardButton] = useState(false);
 
   const allLinks = bookmarks.flatMap((board) =>
     board.links.map((link) => ({
@@ -37,6 +39,19 @@ function App() {
 
   const results = [...startsWithMatches, ...includesMatches];
 
+  function addboard(title, column) {
+    const position = boards.filter((board) => board.column === column).length;
+    const newBoard = {
+      id: crypto.randomUUID(),
+      title,
+      column,
+      position,
+      links: [],
+    };
+
+    setBoards((prev) => [...prev, newBoard]);
+  }
+
   return (
     <>
       <div className='appBackground'>
@@ -61,8 +76,9 @@ function App() {
           setSearchQuery={setSearchQuery}
           searchOpen={searchOpen}
           setSearchOpen={setSearchOpen}
+          setAddBoardButton={setAddBoardButton}
         />
-        <Boards bookmarks={bookmarks} />
+        <Boards boards={boards} />
         {searchOpen && (
           <SearchModal
             searchQuery={searchQuery}
@@ -71,9 +87,14 @@ function App() {
             setSearchOpen={setSearchOpen}
           />
         )}
-        <Modal>
-          <AddBoard />
-        </Modal>
+        {/* {addBoardButton && ( */}
+          <Modal setAddBoardButton={setAddBoardButton}>
+            <AddBoard
+              addboard={addboard}
+              setAddBoardButton={setAddBoardButton}
+            />
+          </Modal>
+        {/* )} */}
       </div>
     </>
   );
