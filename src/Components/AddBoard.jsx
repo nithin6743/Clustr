@@ -78,7 +78,7 @@ export default function AddBoard({ addboard, setAddBoardButton }) {
               e.preventDefault();
               setAddBoardButton(false);
             }}
-            style={{ backgroundColor: '#61390078' }}
+            style={{ backgroundColor: '#61390064' }}
           >
             Cancel
           </button>
