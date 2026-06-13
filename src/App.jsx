@@ -87,14 +87,14 @@ function App() {
             setSearchOpen={setSearchOpen}
           />
         )}
-        {/* {addBoardButton && ( */}
+        {addBoardButton && (
           <Modal setAddBoardButton={setAddBoardButton}>
             <AddBoard
               addboard={addboard}
               setAddBoardButton={setAddBoardButton}
             />
           </Modal>
-        {/* )} */}
+        )}
       </div>
     </>
   );

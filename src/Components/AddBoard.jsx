@@ -3,7 +3,7 @@ import styles from './AddBoard.module.css';
 
 export default function AddBoard({ addboard, setAddBoardButton }) {
   const [boardTitle, setBoardTitle] = useState('');
-  const [columnNum, setColumnNum] = useState('');
+  const [columnNum, setColumnNum] = useState('col1');
 
   function handleSubmit(boardTitle, columnNum) {
     if (!boardTitle || !columnNum) {
@@ -26,9 +26,12 @@ export default function AddBoard({ addboard, setAddBoardButton }) {
       >
         <input
           type='text'
+          placeholder={boardTitle ? '' : 'Enter board name...'}
           className={styles.boardTitleInput}
           value={boardTitle}
-          onChange={(e) => setBoardTitle(e.target.value)}
+          onChange={(e) => {
+            setBoardTitle(e.target.value);
+          }}
         />
         <div className={styles.columns}>
           <button
@@ -45,6 +48,7 @@ export default function AddBoard({ addboard, setAddBoardButton }) {
               e.preventDefault();
               setColumnNum('col2');
             }}
+            className={columnNum === 'col2' ? styles.active : styles.default}
           >
             Col2
           </button>
@@ -53,6 +57,7 @@ export default function AddBoard({ addboard, setAddBoardButton }) {
               e.preventDefault();
               setColumnNum('col3');
             }}
+            className={columnNum === 'col3' ? styles.active : styles.default}
           >
             Col3
           </button>
@@ -61,12 +66,24 @@ export default function AddBoard({ addboard, setAddBoardButton }) {
               e.preventDefault();
               setColumnNum('col4');
             }}
+            className={columnNum === 'col4' ? styles.active : styles.default}
           >
             Col4
           </button>
         </div>
         <div className={styles.buttons}>
           <button
+            className={styles.cancelAddBoard}
+            onClick={(e) => {
+              e.preventDefault();
+              setAddBoardButton(false);
+            }}
+            style={{backgroundColor:"#56b0ff47"}}
+          >
+            Cancel
+          </button>
+          <button
+            style={{ backgroundColor: '#77b9ffd9' }}
             className={styles.addBoardButton}
             onClick={(e) => {
               e.preventDefault();
@@ -74,14 +91,6 @@ export default function AddBoard({ addboard, setAddBoardButton }) {
             }}
           >
             Add Board
-          </button>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              setAddBoardButton(false);
-            }}
-          >
-            Cancel
           </button>
         </div>
       </form>

@@ -1,25 +1,98 @@
 .addboardDiv {
+  width: 400px;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.4);
   border-radius: 8px;
-  padding: 24px 32px;
+  padding: 40px 48px;
+}
+
+.addboardDiv form {
+  width: inherit;
 }
 
 .addBoardTitle {
-  margin: 0 0 24px 0;
-  font-size: 28px;
+  margin: 0 0 32px 0;
+  font-size: 30px;
+  color: #ffffffd9;
 }
 
 .boardTitleInput {
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  font-size: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  font-size: 18px;
   background-color: transparent;
-  padding: 8px 16px;
-  border-radius: 8px;
+  padding: 16px 24px;
+  border-radius: 48px;
+  width: 352px;
+}
+
+.boardTitleInput::placeholder {
+  color: #dddddd;
+  font-size: 16px;
 }
 
 .boardTitleInput:focus {
-  border: 0.2px solid rgba(255, 255, 255, 0.4);
+  border: 2px solid;
+  font-size: 18px;
+  background-color: transparent;
+  padding: 16px 24px;
+  border-radius: 48px;
+  width: 352px;
+}
+
+.columns {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  margin: 24px 0 24px 0;
+  align-items: center;
+}
+
+.default {
+  padding: 24px 24px;
+  background-color: transparent;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+.default:hover {
+  padding: 24px 24px;
+  background-color: transparent;
+  border: 3px solid #77b9ffd9;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.active {
+  font-size: 18px;
+  padding: 20px 20px;
+  background-color: #77b9ffd9;
+  border: 2px solid rgba(255, 255, 255, 0);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cancelAddBoard,
+.addBoardButton {
+  font-size: 18px;
+  padding: 16px 32px;
+  width: 45%;
+  border: 3px solid transparent;
+  border-radius: 8px;
+  background-color: transparent;
+}
+
+.buttons button:hover {
+  cursor: pointer;
+    border: 3px solid #ffffffd9;
+
 }
