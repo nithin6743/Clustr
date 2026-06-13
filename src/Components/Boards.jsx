@@ -26,7 +26,6 @@ export default function Boards({ boards }) {
           ))}
         </div>
       ))}
-      {console.log(columns.col1.length)}
     </div>
   );
 }

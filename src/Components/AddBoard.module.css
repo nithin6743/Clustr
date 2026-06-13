@@ -20,6 +20,7 @@
 }
 
 .boardTitleInput {
+  margin-bottom: 24px;
   border: 2px solid rgba(255, 255, 255, 0.4);
   font-size: 18px;
   background-color: transparent;
@@ -46,7 +47,7 @@
   margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
-  margin: 24px 0 24px 0;
+  margin: 0 0 24px 0;
   align-items: center;
 }
 
@@ -61,7 +62,7 @@
 .default:hover {
   padding: 24px 24px;
   background-color: transparent;
-  border: 3px solid #77b9ffd9;
+  border: 3px solid #fca935;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -69,7 +70,7 @@
 .active {
   font-size: 18px;
   padding: 20px 20px;
-  background-color: #77b9ffd9;
+  background-color: #fca935;
   border: 2px solid rgba(255, 255, 255, 0);
   border-radius: 8px;
   cursor: pointer;
@@ -93,6 +94,5 @@
 
 .buttons button:hover {
   cursor: pointer;
-    border: 3px solid #ffffffd9;
-
+  border: 3px solid #ffffffd9;
 }

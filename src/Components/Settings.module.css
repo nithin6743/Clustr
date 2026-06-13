@@ -1,0 +1,122 @@
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #61390078;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+input:checked + .slider {
+  background-color: #fca935;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #61390078;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(45px);
+}
+
+/* Rounded sliders */
+.round {
+  border-radius: 34px;
+}
+
+.round:before {
+  border-radius: 50%;
+}
+
+.settings {
+  width: 800px;
+  border: 2px solid rgba(255, 255, 255, 0.488);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.settings h3 {
+  text-align: center;
+  font-size: 30px;
+  color: rgba(255, 255, 255, 0.883);
+  margin: 24px 0;
+}
+
+.settingsMenu {
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.settingsMenu p {
+  font-size: 24px;
+  color: #ffff;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.themeSettings div,
+.layoutSettings div,
+.quickLinksSettings div,
+.backgroundSettings div {
+  width: 700px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.layoutSettings {
+  display: flex;
+  flex-direction: column;
+}
+
+.settingName {
+  font-size: 18px;
+  color: aliceblue;
+  margin-left: 24px;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: start;
+  align-items: center;
+}

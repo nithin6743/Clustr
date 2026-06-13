@@ -229,6 +229,12 @@
         "title": "TerraInk: The Cartographic Poster Engine",
         "url": "https://terraink.app/",
         "favicon": "https://www.google.com/s2/favicons?domain=https://terraink.app/"
+      },
+      {
+        "id": 9123434,
+        "title": "Varsh - love of my life",
+        "url": "https://static.vecteezy.com/system/resources/thumbnails/055/041/923/small/love-you-handwritten-on-a-piece-of-paper-wrinkly-paper-with-handwritten-love-note-and-heart-for-valentine-s-day-handwritten-romantic-message-for-valentine-photo.jpg",
+        "favicon": "./favicon_io/favicon-32x32.png"
       }
     ]
   },
@@ -287,12 +293,6 @@
         "title": "Airtm - Get Paid Better",
         "url": "https://app.airtm.com/home",
         "favicon": "https://www.google.com/s2/favicons?domain=https://app.airtm.com/home"
-      },
-      {
-        "id": 9123434,
-        "title": "Varsh - love of my life",
-        "url": "https://static.vecteezy.com/system/resources/thumbnails/055/041/923/small/love-you-handwritten-on-a-piece-of-paper-wrinkly-paper-with-handwritten-love-note-and-heart-for-valentine-s-day-handwritten-romantic-message-for-valentine-photo.jpg",
-        "favicon": "./favicon_io/favicon-32x32.png"
       }
     ]
   },

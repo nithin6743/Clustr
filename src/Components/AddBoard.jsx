@@ -24,15 +24,6 @@ export default function AddBoard({ addboard, setAddBoardButton }) {
           handleSubmit(boardTitle, columnNum);
         }}
       >
-        <input
-          type='text'
-          placeholder={boardTitle ? '' : 'Enter board name...'}
-          className={styles.boardTitleInput}
-          value={boardTitle}
-          onChange={(e) => {
-            setBoardTitle(e.target.value);
-          }}
-        />
         <div className={styles.columns}>
           <button
             onClick={(e) => {
@@ -71,6 +62,15 @@ export default function AddBoard({ addboard, setAddBoardButton }) {
             Col4
           </button>
         </div>
+        <input
+          type='text'
+          placeholder={boardTitle ? '' : 'Enter board name...'}
+          className={styles.boardTitleInput}
+          value={boardTitle}
+          onChange={(e) => {
+            setBoardTitle(e.target.value);
+          }}
+        />
         <div className={styles.buttons}>
           <button
             className={styles.cancelAddBoard}
@@ -78,12 +78,12 @@ export default function AddBoard({ addboard, setAddBoardButton }) {
               e.preventDefault();
               setAddBoardButton(false);
             }}
-            style={{backgroundColor:"#56b0ff47"}}
+            style={{ backgroundColor: '#61390078' }}
           >
             Cancel
           </button>
           <button
-            style={{ backgroundColor: '#77b9ffd9' }}
+            style={{ backgroundColor: '#fca935' }}
             className={styles.addBoardButton}
             onClick={(e) => {
               e.preventDefault();

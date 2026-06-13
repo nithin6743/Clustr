@@ -7,13 +7,21 @@ import SearchModal from './Components/modals/SearchModal.jsx';
 
 import Modal from './Components/modals/Modal.jsx';
 import AddBoard from './Components/AddBoard.jsx';
+import Settings from './Components/Settings.jsx';
 
 function App() {
-  const [bg, setBg] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const [boards, setBoards] = useState(bookmarks);
   const [addBoardButton, setAddBoardButton] = useState(false);
+  const [settings, setSettings] = useState({
+    darkMode: true,
+    showSearchBar: true,
+    showClock: false,
+    showQuickLinks: true,
+    animatedBackground: true,
+  });
 
   const allLinks = bookmarks.flatMap((board) =>
     board.links.map((link) => ({
@@ -55,28 +63,47 @@ function App() {
   return (
     <>
       <div className='appBackground'>
-        {bg ? (
-          <video autoPlay loop muted>
-            <source src='/bgVideo.webm' type='video/webm' />
+        {settings.darkMode ? (
+          settings.animatedBackground ? (
+            <video autoPlay loop muted key='dark-video'>
+              <source src='/Dark.webm' type='video/webm' />
+            </video>
+          ) : (
+            <img
+              src='/Dark.jpg'
+              alt='Background'
+              style={{
+                width: '100vw',
+                height: '100vh',
+                objectFit: 'cover',
+              }}
+            />
+          )
+        ) : settings.animatedBackground ? (
+          <video autoPlay loop muted key='light-video'>
+            <source src='/Light.webm' type='video/webm' />
           </video>
         ) : (
           <img
-            src='/bgImage.jpg'
+            src='/Light.jpg'
             alt='Background'
-            style={{ width: '100vw', height: '100vh', objectFit: 'fit' }}
+            style={{
+              width: '100vw',
+              height: '100vh',
+              objectFit: 'cover',
+            }}
           />
         )}
       </div>
-      {/* <div className='buttons'>
-        <button onClick={() => setBg(!bg)}>Background 1</button>
-      </div> */}
+
       <div className='App'>
         <TopBar
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
-          searchOpen={searchOpen}
           setSearchOpen={setSearchOpen}
           setAddBoardButton={setAddBoardButton}
+          setSettingsOpen={setSettingsOpen}
+          settings={settings}
         />
         <Boards boards={boards} />
         {searchOpen && (
@@ -93,6 +120,14 @@ function App() {
               addboard={addboard}
               setAddBoardButton={setAddBoardButton}
             />
+          </Modal>
+        )}
+        {settingsOpen && (
+          <Modal
+            setAddBoardButton={setAddBoardButton}
+            setSettingsOpen={setSettingsOpen}
+          >
+            <Settings settings={settings} setSettings={setSettings} />
           </Modal>
         )}
       </div>
