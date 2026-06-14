@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './index.css';
 import TopBar from './Components/TopBar.jsx';
 import Boards from './Components/Boards.jsx';
-import bookmarks from './Components/data/Bookmarks.json';
 import SearchModal from './Components/modals/SearchModal.jsx';
 
 import Modal from './Components/modals/Modal.jsx';
@@ -10,20 +9,32 @@ import AddBoard from './Components/AddBoard.jsx';
 import Settings from './Components/Settings.jsx';
 
 function App() {
+  const [boards, setBoards] = useState(() => {
+    const saved = localStorage.getItem('clustr-boards');
+
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [bookmarks, setBookmarks] = useState([]);
+
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [boards, setBoards] = useState(bookmarks);
   const [addBoardButton, setAddBoardButton] = useState(false);
-  const [settings, setSettings] = useState({
-    darkMode: true,
-    showSearchBar: true,
-    showClock: false,
-    showQuickLinks: true,
-    animatedBackground: true,
+  const [settings, setSettings] = useState(() => {
+    const saved = localStorage.getItem('clustr-settings');
+
+    return saved
+      ? JSON.parse(saved)
+      : {
+          darkMode: true,
+          showSearchBar: true,
+          showQuickLinks: true,
+          animatedBackground: true,
+        };
   });
 
-  const allLinks = bookmarks.flatMap((board) =>
+  // search logic
+  const allLinks = boards.flatMap((board) =>
     board.links.map((link) => ({
       ...link,
       boardId: board.id,
@@ -47,6 +58,7 @@ function App() {
 
   const results = [...startsWithMatches, ...includesMatches];
 
+  // add board logic
   function addboard(title, column) {
     const position = boards.filter((board) => board.column === column).length;
     const newBoard = {
@@ -59,6 +71,63 @@ function App() {
 
     setBoards((prev) => [...prev, newBoard]);
   }
+
+  // import bookmarks logic
+  useEffect(() => {
+    if (!chrome?.bookmarks) {
+      console.error('Bookmarks API unavailable');
+      return;
+    }
+
+    chrome.bookmarks.getTree((tree) => {
+      const extracted = [];
+
+      function traverse(nodes) {
+        nodes.forEach((node) => {
+          if (node.url) {
+            extracted.push({
+              id: node.id,
+              title: node.title,
+              url: node.url,
+            });
+          }
+
+          if (node.children) {
+            traverse(node.children);
+          }
+        });
+      }
+
+      traverse(tree);
+      setBookmarks(extracted);
+    });
+  }, []);
+
+  // imported board logic
+  useEffect(() => {
+    if (boards.length > 0) return;
+    if (!bookmarks.length) return;
+
+    setBoards([
+      {
+        id: 'imported',
+        title: 'Imported',
+        column: 'col1',
+        position: 0,
+        links: bookmarks,
+      },
+    ]);
+  }, [bookmarks]);
+
+  // save settings logic
+  useEffect(() => {
+    localStorage.setItem('clustr-settings', JSON.stringify(settings));
+  }, [settings]);
+
+  // save boards
+  useEffect(() => {
+    localStorage.setItem('clustr-boards', JSON.stringify(boards));
+  }, [boards]);
 
   return (
     <>

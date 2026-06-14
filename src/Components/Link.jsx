@@ -6,7 +6,7 @@ export default function Link({ link, settings }) {
       className={`${styles.link} ${settings.darkMode ? styles.linkDark : styles.linkLight}`}
     >
       <a href={link.url} className={styles.linkAddress}>
-        <img src={link.favicon} />
+        <img src={`https://www.google.com/s2/favicons?domain=${link.url}`} />
         <span
           className={styles.linkText}
           style={
