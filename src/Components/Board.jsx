@@ -2,7 +2,7 @@ import styles from './Board.module.css';
 import glass from './GlassUI.module.css';
 import Link from './Link';
 
-export default function Board({ board, settings }) {
+export default function Board({ board, settings, deleteBoard, setModal }) {
   return (
     <div
       className={`${styles.board} ${settings.darkMode ? glass.glassDark : glass.glassLight}`}
@@ -65,25 +65,35 @@ export default function Board({ board, settings }) {
               </svg>
             </button>
 
-            <button
-              className={styles.deleteIcon}
-              // title='Delete Board'
-              onClick={() => alert('Delete Board')}
-            >
-              <svg
-                // className={styles.deleteIcon}
-                xmlns='http://www.w3.org/2000/svg'
-                width='1em'
-                height='1em'
-                viewBox='0 0 24 24'
+            {board.id === 'imported' ? (
+              ''
+            ) : (
+              <button
+                className={styles.deleteIcon}
+                // title='Delete Board'
+                onClick={() =>
+                  setModal({
+                    type: 'deleteBoard',
+                    boardId: board.id,
+                    boardTitle: board.title,
+                  })
+                }
               >
-                <path d='M0 0h24v24H0z' fill='none' />
-                <path
-                  fill='#fb6d6d'
-                  d='M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-6.287 10.713Q11 16.425 11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17t.713-.288m4 0Q15 16.426 15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17t.713-.288M7 6v13z'
-                />
-              </svg>
-            </button>
+                <svg
+                  // className={styles.deleteIcon}
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='1em'
+                  height='1em'
+                  viewBox='0 0 24 24'
+                >
+                  <path d='M0 0h24v24H0z' fill='none' />
+                  <path
+                    fill='#fb6d6d'
+                    d='M7 21q-.825 0-1.412-.587T5 19V6q-.425 0-.712-.288T4 5t.288-.712T5 4h4q0-.425.288-.712T10 3h4q.425 0 .713.288T15 4h4q.425 0 .713.288T20 5t-.288.713T19 6v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zm-6.287 10.713Q11 16.425 11 16V9q0-.425-.288-.712T10 8t-.712.288T9 9v7q0 .425.288.713T10 17t.713-.288m4 0Q15 16.426 15 16V9q0-.425-.288-.712T14 8t-.712.288T13 9v7q0 .425.288.713T14 17t.713-.288M7 6v13z'
+                  />
+                </svg>
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import './index.css';
 import TopBar from './Components/TopBar.jsx';
 import Boards from './Components/Boards.jsx';
 import SearchModal from './Components/modals/SearchModal.jsx';
-
+import DeleteWarning from './Components/modals/DeleteWarning.jsx';
 import Modal from './Components/modals/Modal.jsx';
 import AddBoard from './Components/AddBoard.jsx';
 import Settings from './Components/Settings.jsx';
@@ -15,9 +15,9 @@ function App() {
     return saved ? JSON.parse(saved) : [];
   });
   const [bookmarks, setBookmarks] = useState([]);
-
   const [searchQuery, setSearchQuery] = useState('');
   const [searchOpen, setSearchOpen] = useState(false);
+  const [modal, setModal] = useState(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [addBoardButton, setAddBoardButton] = useState(false);
   const [settings, setSettings] = useState(() => {
@@ -34,7 +34,7 @@ function App() {
   });
 
   // search logic
-  const allLinks = boards.flatMap((board) =>
+  const allLinks = (boards || []).flatMap((board) =>
     board.links.map((link) => ({
       ...link,
       boardId: board.id,
@@ -70,6 +70,11 @@ function App() {
     };
 
     setBoards((prev) => [...prev, newBoard]);
+  }
+
+  // delete board
+  function deleteBoard(boardId) {
+    setBoards((prev) => prev.filter((board) => board.id !== boardId));
   }
 
   // import bookmarks logic
@@ -174,7 +179,12 @@ function App() {
           setSettingsOpen={setSettingsOpen}
           settings={settings}
         />
-        <Boards boards={boards} settings={settings} />
+        <Boards
+          boards={boards}
+          settings={settings}
+          deleteBoard={deleteBoard}
+          setModal={setModal}
+        />
         {searchOpen && (
           <SearchModal
             searchQuery={searchQuery}
@@ -197,6 +207,21 @@ function App() {
             setSettingsOpen={setSettingsOpen}
           >
             <Settings settings={settings} setSettings={setSettings} />
+          </Modal>
+        )}
+        {modal && (
+          <Modal closeModal={() => setModal(null)}>
+            {modal.type === 'deleteBoard' && (
+              <DeleteWarning
+                title='Delete Board'
+                message={`Delete "${modal.boardTitle}"?`}
+                setModal={setModal}
+                onConfirm={() => {
+                  deleteBoard(modal.boardId);
+                  setModal(null);
+                }}
+              />
+            )}
           </Modal>
         )}
       </div>

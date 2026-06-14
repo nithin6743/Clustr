@@ -1,0 +1,43 @@
+.deleteWarning {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 8px;
+}
+
+.deleteWarning h3 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffff;
+  margin-bottom: 0px;
+}
+
+.deleteWarning p {
+  font-size: 18px;
+  color: #ffff;
+  margin-bottom: 10px;
+}
+.deleteWarning button {
+  padding: 16px 32px;
+  border-radius: 8px;
+}
+
+.cancel {
+  background-color: transparent;
+  border: 2px solid rgb(252, 169, 53);
+  color: rgb(252, 169, 53);
+}
+
+.delete {
+  background-color: rgb(252, 169, 53);
+  border: 2px solid rgb(252, 169, 53);
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.buttons button:hover {
+  cursor: pointer;
+}

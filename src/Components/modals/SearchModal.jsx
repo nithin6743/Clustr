@@ -50,7 +50,10 @@ export default function SearchModal({
                   className={styles.indieResult}
                   key={result.Id}
                 >
-                  <img src={result.favicon} alt='' />
+                  <img
+                    src={`https://www.google.com/s2/favicons?domain=${result.url}`}
+                    alt=''
+                  />
                   <span className={styles.linkText}>{result.title}</span>
                 </a>
               );
