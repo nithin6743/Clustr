@@ -105,7 +105,7 @@ function App() {
           setSettingsOpen={setSettingsOpen}
           settings={settings}
         />
-        <Boards boards={boards} />
+        <Boards boards={boards} settings={settings} />
         {searchOpen && (
           <SearchModal
             searchQuery={searchQuery}

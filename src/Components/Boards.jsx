@@ -1,7 +1,7 @@
 import styles from './Boards.module.css';
 import Board from './Board';
 
-export default function Boards({ boards }) {
+export default function Boards({ boards, settings }) {
   const columns = {
     col1: [],
     col2: [],
@@ -22,7 +22,7 @@ export default function Boards({ boards }) {
       {Object.entries(columns).map(([columnId, columnBoards]) => (
         <div key={columnId} className={styles.column}>
           {columnBoards.map((board) => (
-            <Board key={board.id} board={board} />
+            <Board key={board.id} board={board} settings={settings} />
           ))}
         </div>
       ))}
