@@ -14,7 +14,6 @@
   width: 724px;
   z-index: 1000;
   animation: searchEnter 0.25s ease;
-
 }
 
 .results {
@@ -38,7 +37,7 @@
   align-items: center;
   padding: 1rem 4rem;
   scroll-behavior: smooth;
-  border-bottom: 0.1px solid #ffffff4d;
+  border-bottom: 0.1px solid #ffffff;
 }
 
 .indieResult:hover {
@@ -53,10 +52,15 @@
   padding-left: 1rem;
   background: transparent;
   font-size: 20px;
+  width: 100%;
+}
+
+.searchInput::placeholder{
+  color: #ffffffb6;
 }
 
 .searchModal form {
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgb(255, 255, 255);
   border-radius: 8px;
   width: 720px;
   display: flex;

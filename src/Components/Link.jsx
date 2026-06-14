@@ -2,7 +2,9 @@ import styles from './Link.module.css';
 
 export default function Link({ link, settings }) {
   return (
-    <div className={styles.link}>
+    <div
+      className={`${styles.link} ${settings.darkMode ? styles.linkDark : styles.linkLight}`}
+    >
       <a href={link.url} className={styles.linkAddress}>
         <img src={link.favicon} />
         <span

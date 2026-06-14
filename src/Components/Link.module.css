@@ -17,8 +17,12 @@
   width: 70%;
 }
 
-.link:hover {
+.linkDark:hover {
   background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+.linkLight:hover {
+  background-color: #10101026;
   border-radius: 4px;
 }
 

@@ -19,12 +19,20 @@
   color: #ffffff;
 }
 
-.boardBox::after {
+.boardBoxDark::after {
   content: '';
   display: block;
   width: 100%;
   height: 2px;
   background-color: #ffffff88;
+  margin-top: 0.5rem;
+}
+.boardBoxLight::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #10101070;
   margin-top: 0.5rem;
 }
 

@@ -8,11 +8,8 @@ export default function Board({ board, settings }) {
       className={`${styles.board} ${settings.darkMode ? glass.glassDark : glass.glassLight}`}
     >
       <div
-        className={styles.boardBox}
-        style={
-          settings.darkMode
-            ? { backgroundColor: '#ffffff88' }
-            : { backgroundColor: '#ffffff88' }
+        className={
+          settings.darkMode ? styles.boardBoxDark : styles.boardBoxLight
         }
       >
         <div className={styles.boardTop}>
