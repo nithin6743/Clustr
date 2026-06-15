@@ -7,6 +7,7 @@ import DeleteWarning from './Components/modals/DeleteWarning.jsx';
 import Modal from './Components/modals/Modal.jsx';
 import AddBoard from './Components/AddBoard.jsx';
 import Settings from './Components/Settings.jsx';
+import Toast from './Components/modals/Toast.jsx';
 
 function App() {
   const [boards, setBoards] = useState(() => {
@@ -20,6 +21,7 @@ function App() {
   const [modal, setModal] = useState(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [addBoardButton, setAddBoardButton] = useState(false);
+  const [toast, setToast] = useState(null);
   const [settings, setSettings] = useState(() => {
     const saved = localStorage.getItem('clustr-settings');
 
@@ -70,6 +72,10 @@ function App() {
     };
 
     setBoards((prev) => [...prev, newBoard]);
+    setToast({
+      type: 'success',
+      message: 'Board created',
+    });
   }
 
   // edit board title
@@ -79,11 +85,19 @@ function App() {
         board.id === boardId ? { ...board, title: newTitle } : board
       )
     );
+    setToast({
+      type: 'success',
+      message: 'Board title updated',
+    });
   }
 
   // delete board logic
   function deleteBoard(boardId) {
     setBoards((prev) => prev.filter((board) => board.id !== boardId));
+    setToast({
+      type: 'success',
+      message: 'Board deleted',
+    });
   }
 
   // add links logic
@@ -92,7 +106,10 @@ function App() {
     try {
       parsedUrl = new URL(url);
     } catch {
-      alert('Invalid URL');
+      setToast({
+        type: 'error',
+        message: 'Failed to add link (empty url)',
+      });
       return;
     }
     const hostname = parsedUrl.hostname.replace(/^www\./, '');
@@ -119,7 +136,10 @@ function App() {
         if (board.id !== boardId) return board;
         const dupLinkExist = board.links.some((link) => link.url === url);
         if (dupLinkExist) {
-          alert('link already exists!!');
+          setToast({
+            type: 'error',
+            message: 'Link already exists in that board',
+          });
           return board;
         }
         return {
@@ -128,6 +148,10 @@ function App() {
         };
       })
     );
+    setToast({
+      type: 'success',
+      message: 'Link added',
+    });
   }
 
   // edit link
@@ -137,7 +161,10 @@ function App() {
     try {
       hostname = new URL(url).hostname;
     } catch {
-      alert('invalid url');
+      setToast({
+        type: 'error',
+        message: 'link edit failed (Invalid url)',
+      });
       return;
     }
 
@@ -153,6 +180,10 @@ function App() {
           : board
       )
     );
+    setToast({
+      type: 'success',
+      message: 'Link updated',
+    });
   }
 
   // delete link logic
@@ -167,6 +198,10 @@ function App() {
           : board
       )
     );
+    setToast({
+      type: 'success',
+      message: 'Link deleted',
+    });
   }
 
   // import bookmarks logic
@@ -197,6 +232,10 @@ function App() {
 
       traverse(tree);
       setBookmarks(extracted);
+      setToast({
+        type: 'success',
+        message: 'Bookmarks loaded successfully',
+      });
     });
   }, []);
 
@@ -270,6 +309,7 @@ function App() {
           setAddBoardButton={setAddBoardButton}
           setSettingsOpen={setSettingsOpen}
           settings={settings}
+          setToast={setToast}
         />
         <Boards
           boards={boards}
@@ -278,6 +318,7 @@ function App() {
           addLink={addLink}
           editBoardTitle={editBoardTitle}
           editLink={editLink}
+          setToast={setToast}
         />
         {searchOpen && (
           <SearchModal
@@ -292,6 +333,7 @@ function App() {
             <AddBoard
               addboard={addboard}
               setAddBoardButton={setAddBoardButton}
+              setToast={setToast}
             />
           </Modal>
         )}
@@ -329,6 +371,7 @@ function App() {
             )}
           </Modal>
         )}
+        {toast && <Toast toast={toast} setToast={setToast} />}
       </div>
     </>
   );

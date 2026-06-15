@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import styles from './Link.module.css';
 
-export default function Link({ link, settings, setModal, boardId, editLink }) {
+export default function Link({
+  link,
+  settings,
+  setModal,
+  boardId,
+  editLink,
+  setToast,
+}) {
   const [editingLink, setEditingLink] = useState(false);
   const [newTitle, setNewTitle] = useState(link.title);
   const [newUrl, setNewUrl] = useState(link.url);
@@ -15,7 +22,10 @@ export default function Link({ link, settings, setModal, boardId, editLink }) {
           const url = newUrl.trim();
 
           if (!title || !url) {
-            alert('Title and url cannot be empty');
+            setToast({
+              type: 'error',
+              message: 'Title and url cannot be empty for a link',
+            });
             return;
           }
           editLink(boardId, link.id, title, url);

@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import styles from './AddBoard.module.css';
 
-export default function AddBoard({ addboard, setAddBoardButton }) {
+export default function AddBoard({ addboard, setAddBoardButton, setToast }) {
   const [boardTitle, setBoardTitle] = useState('');
   const [columnNum, setColumnNum] = useState('col1');
 
   function handleSubmit(boardTitle, columnNum) {
     if (!boardTitle || !columnNum) {
-      alert('Select Column and Fill board name');
+      setToast({
+        type: 'error',
+        message: 'Failed to create board (empty title)',
+      });
       return;
     }
 

@@ -10,6 +10,7 @@ export default function Board({
   addLink,
   editBoardTitle,
   editLink,
+  setToast,
 }) {
   const [showAddLink, setShowAddLink] = useState(false);
   const [EditingTitle, setEditingTitle] = useState(false);
@@ -38,6 +39,11 @@ export default function Board({
 
                 if (trimmedTitle) {
                   editBoardTitle(board.id, trimmedTitle);
+                } else {
+                  setToast({
+                    type: 'error',
+                    message: 'Changing board title failed (empty title)',
+                  });
                 }
                 setEditingTitle(false);
               }}
@@ -144,6 +150,7 @@ export default function Board({
                 setModal={setModal}
                 boardId={board.id}
                 editLink={editLink}
+                setToast={setToast}
               />
             );
           })}
@@ -153,7 +160,10 @@ export default function Board({
                 e.preventDefault();
 
                 if (!url.trim()) {
-                  alert('empty url');
+                  setToast({
+                    type: 'error',
+                    message: 'Add link failed (empty url)',
+                  });
                   return;
                 }
 

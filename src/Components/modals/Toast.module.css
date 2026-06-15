@@ -1,0 +1,7 @@
+.toast {
+  position: fixed;
+  z-index: 10000;
+  top: 2%;
+  left: 2%;
+  background-color: aliceblue;
+}

@@ -8,6 +8,7 @@ export default function Boards({
   addLink,
   editBoardTitle,
   editLink,
+  setToast,
 }) {
   const columns = {
     col1: [],
@@ -37,6 +38,7 @@ export default function Boards({
               addLink={addLink}
               editBoardTitle={editBoardTitle}
               editLink={editLink}
+              setToast={setToast}
             />
           ))}
         </div>
