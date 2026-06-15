@@ -96,3 +96,17 @@
   cursor: pointer;
   border: 3px solid #ffffffd9;
 }
+
+.cancelAddBoard {
+  background-color: transparent;
+  border: 2px solid #fca935;
+  border-radius: 8px;
+  color: #fca935;
+  font-weight: bold;
+}
+
+.addBoardButton {
+  background-color: #fca935;
+  border-radius: 8px;
+  font-weight: bold;
+}

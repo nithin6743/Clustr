@@ -1,7 +1,62 @@
+import { useState } from 'react';
 import styles from './Link.module.css';
 
-export default function Link({ link, settings }) {
-  return (
+export default function Link({ link, settings, setModal, boardId, editLink }) {
+  const [editingLink, setEditingLink] = useState(false);
+  const [newTitle, setNewTitle] = useState(link.title);
+  const [newUrl, setNewUrl] = useState(link.url);
+
+  return editingLink ? (
+    <div className={styles.editingLink}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          const title = newTitle.trim();
+          const url = newUrl.trim();
+
+          if (!title || !url) {
+            alert('Title and url cannot be empty');
+            return;
+          }
+          editLink(boardId, link.id, title, url);
+          setEditingLink(false);
+        }}
+        // onBlur={() => {
+        //   setEditingLink(false);
+        //   setNewTitle(link.title);
+        //   setNewUrl(link.url);
+        // }}
+      >
+        <input
+          className={styles.newLinkTitle}
+          type='text'
+          value={newTitle}
+          autoFocus
+          onChange={(e) => setNewTitle(e.target.value)}
+        />
+        <input
+          className={styles.newLinkUrl}
+          type='url'
+          value={newUrl}
+          onChange={(e) => setNewUrl(e.target.value)}
+        />
+        <div className={styles.editLinkButtons}>
+          <button
+            type='button'
+            onClick={(e) => {
+              e.preventDefault();
+              setEditingLink(false);
+              setNewTitle(link.title);
+              setNewUrl(link.url);
+            }}
+          >
+            Cancel
+          </button>
+          <button type='submit'>Done</button>
+        </div>
+      </form>
+    </div>
+  ) : (
     <div
       className={`${styles.link} ${settings.darkMode ? styles.linkDark : styles.linkLight}`}
     >
@@ -20,7 +75,11 @@ export default function Link({ link, settings }) {
         <button
           className={styles.editIcon}
           //   title='Edit Board'
-          onClick={() => alert('Edit Link')}
+          onClick={() => {
+            setEditingLink(true);
+            setNewTitle(link.title);
+            setNewUrl(link.url);
+          }}
         >
           <svg
             // className={styles.editIcon}
@@ -43,7 +102,14 @@ export default function Link({ link, settings }) {
         <button
           className={styles.deleteIcon}
           //   title='Delete Board'
-          onClick={() => alert('Delete Link')}
+          onClick={() =>
+            setModal({
+              type: 'deleteLink',
+              boardId,
+              linkId: link.id,
+              linkTitle: link.title,
+            })
+          }
         >
           <svg
             // className={styles.deleteIcon}

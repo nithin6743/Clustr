@@ -1,8 +1,21 @@
+import { useState } from 'react';
 import styles from './Board.module.css';
 import glass from './GlassUI.module.css';
 import Link from './Link';
 
-export default function Board({ board, settings, deleteBoard, setModal }) {
+export default function Board({
+  board,
+  settings,
+  setModal,
+  addLink,
+  editBoardTitle,
+  editLink,
+}) {
+  const [showAddLink, setShowAddLink] = useState(false);
+  const [EditingTitle, setEditingTitle] = useState(false);
+  const [newTitle, setNewTitle] = useState(board.title);
+  const [url, setUrl] = useState('');
+
   return (
     <div
       className={`${styles.board} ${settings.darkMode ? glass.glassDark : glass.glassLight}`}
@@ -13,42 +26,65 @@ export default function Board({ board, settings, deleteBoard, setModal }) {
         }
       >
         <div className={styles.boardTop}>
-          <h3
-            className={styles.boardTitle}
-            style={
-              settings.darkMode ? { color: '#ffff' } : { color: '#101010c1' }
-            }
-          >
-            {board.title}{' '}
-          </h3>
-          <div className={styles.boardIcons}>
-            <button
-              className={styles.editIcon}
-              // title='Edit Board'
-              onClick={() => alert('Edit Board')}
+          {EditingTitle ? (
+            <input
+              className={styles.editingtitle}
+              type='text'
+              value={newTitle}
+              autoFocus
+              onChange={(e) => setNewTitle(e.target.value)}
+              onBlur={() => {
+                const trimmedTitle = newTitle.trim();
+
+                if (trimmedTitle) {
+                  editBoardTitle(board.id, trimmedTitle);
+                }
+                setEditingTitle(false);
+              }}
+            />
+          ) : (
+            <h3
+              className={styles.boardTitle}
+              style={
+                settings.darkMode ? { color: '#ffff' } : { color: '#101010c1' }
+              }
             >
-              <svg
-                // className={styles.editIcon}
-                xmlns='http://www.w3.org/2000/svg'
-                width='1em'
-                height='1em'
-                viewBox='0 0 1024 1024'
+              {board.title}{' '}
+            </h3>
+          )}
+          <div className={styles.boardIcons}>
+            {!EditingTitle && (
+              <button
+                className={styles.editIcon}
+                // title='Edit Board'
+                onClick={() => {
+                  setEditingTitle(true);
+                  setNewTitle(board.title);
+                }}
               >
-                <path d='M0 0h1024v1024H0z' fill='none' />
-                <path
-                  fill={settings.darkMode ? '#fafafa' : '#101010c1'}
-                  d='M832 512a32 32 0 1 1 64 0v352a32 32 0 0 1-32 32H160a32 32 0 0 1-32-32V160a32 32 0 0 1 32-32h352a32 32 0 0 1 0 64H192v640h640z'
-                />
-                <path
-                  fill={settings.darkMode ? '#fafafa' : '#101010c1'}
-                  d='m470 554.2l52.8-7.5L847 222.4a32 32 0 1 0-45.2-45.2L477.4 501.4l-7.5 52.8zm422.4-422.4a96 96 0 0 1 0 135.8L560.5 599.5a32 32 0 0 1-18.1 9l-105.6 15.2a32 32 0 0 1-36.2-36.2l15-105.6a32 32 0 0 1 9.1-18.2l332-331.8a96 96 0 0 1 135.7 0z'
-                />
-              </svg>
-            </button>
+                <svg
+                  // className={styles.editIcon}
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='1em'
+                  height='1em'
+                  viewBox='0 0 1024 1024'
+                >
+                  <path d='M0 0h1024v1024H0z' fill='none' />
+                  <path
+                    fill={settings.darkMode ? '#fafafa' : '#101010c1'}
+                    d='M832 512a32 32 0 1 1 64 0v352a32 32 0 0 1-32 32H160a32 32 0 0 1-32-32V160a32 32 0 0 1 32-32h352a32 32 0 0 1 0 64H192v640h640z'
+                  />
+                  <path
+                    fill={settings.darkMode ? '#fafafa' : '#101010c1'}
+                    d='m470 554.2l52.8-7.5L847 222.4a32 32 0 1 0-45.2-45.2L477.4 501.4l-7.5 52.8zm422.4-422.4a96 96 0 0 1 0 135.8L560.5 599.5a32 32 0 0 1-18.1 9l-105.6 15.2a32 32 0 0 1-36.2-36.2l15-105.6a32 32 0 0 1 9.1-18.2l332-331.8a96 96 0 0 1 135.7 0z'
+                  />
+                </svg>
+              </button>
+            )}
             <button
               className={styles.addIcon}
               // title='Add Link'
-              onClick={() => alert('Add Link')}
+              onClick={() => setShowAddLink(true)}
             >
               <svg
                 // className={styles.addIcon}
@@ -100,8 +136,69 @@ export default function Board({ board, settings, deleteBoard, setModal }) {
       <>
         <div className={styles.links}>
           {board.links.map((link) => {
-            return <Link key={link.id} link={link} settings={settings} />;
+            return (
+              <Link
+                key={link.id}
+                link={link}
+                settings={settings}
+                setModal={setModal}
+                boardId={board.id}
+                editLink={editLink}
+              />
+            );
           })}
+          {showAddLink && (
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+
+                if (!url.trim()) {
+                  alert('empty url');
+                  return;
+                }
+
+                addLink(board.id, url);
+
+                setUrl('');
+                setShowAddLink(false);
+              }}
+            >
+              <input
+                className={styles.addLink}
+                type='url'
+                placeholder='Enter url...'
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+              />
+
+              <div className={styles.addLinkButtons}>
+                <button
+                  type='button'
+                  onClick={() => {
+                    setUrl('');
+                    setShowAddLink(false);
+                  }}
+                  style={{
+                    color: 'rgb(255, 216, 162)',
+                    backgroundColor: 'transparent',
+                    border: '1.5px solid rgb(252, 169, 53)',
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type='submit'
+                  style={{
+                    color: 'rgb(255, 255, 255)',
+                    backgroundColor: 'rgb(252, 169, 53',
+                    border: '1.5px solid rgb(252, 169, 53)',
+                  }}
+                >
+                  Add
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </>
     </div>

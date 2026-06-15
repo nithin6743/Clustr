@@ -1,7 +1,14 @@
 import styles from './Boards.module.css';
 import Board from './Board';
 
-export default function Boards({ boards, settings, deleteBoard, setModal }) {
+export default function Boards({
+  boards,
+  settings,
+  setModal,
+  addLink,
+  editBoardTitle,
+  editLink,
+}) {
   const columns = {
     col1: [],
     col2: [],
@@ -26,8 +33,10 @@ export default function Boards({ boards, settings, deleteBoard, setModal }) {
               key={board.id}
               board={board}
               settings={settings}
-              deleteBoard={deleteBoard}
               setModal={setModal}
+              addLink={addLink}
+              editBoardTitle={editBoardTitle}
+              editLink={editLink}
             />
           ))}
         </div>

@@ -72,9 +72,101 @@ function App() {
     setBoards((prev) => [...prev, newBoard]);
   }
 
-  // delete board
+  // edit board title
+  function editBoardTitle(boardId, newTitle) {
+    setBoards((prev) =>
+      prev.map((board) =>
+        board.id === boardId ? { ...board, title: newTitle } : board
+      )
+    );
+  }
+
+  // delete board logic
   function deleteBoard(boardId) {
     setBoards((prev) => prev.filter((board) => board.id !== boardId));
+  }
+
+  // add links logic
+  function addLink(boardId, url) {
+    let parsedUrl;
+    try {
+      parsedUrl = new URL(url);
+    } catch {
+      alert('Invalid URL');
+      return;
+    }
+    const hostname = parsedUrl.hostname.replace(/^www\./, '');
+    let title;
+    const slug = parsedUrl.pathname.split('/').filter(Boolean).pop();
+    if (slug && slug.length > 5 && slug.includes('-')) {
+      title = slug.replace(/^\d+-/, '').replace(/-/g, ' ');
+    } else {
+      const parts = hostname.split('.');
+      title = parts.length > 2 ? parts[parts.length - 2] : parts[0];
+    }
+    const displayTitle = title
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+    const newLink = {
+      id: crypto.randomUUID(),
+      title: displayTitle,
+      url,
+      hostname,
+    };
+    setBoards((prev) =>
+      prev.map((board) => {
+        if (board.id !== boardId) return board;
+        const dupLinkExist = board.links.some((link) => link.url === url);
+        if (dupLinkExist) {
+          alert('link already exists!!');
+          return board;
+        }
+        return {
+          ...board,
+          links: [...board.links, newLink],
+        };
+      })
+    );
+  }
+
+  // edit link
+  function editLink(boardId, linkId, title, url) {
+    let hostname;
+
+    try {
+      hostname = new URL(url).hostname;
+    } catch {
+      alert('invalid url');
+      return;
+    }
+
+    setBoards((prev) =>
+      prev.map((board) =>
+        board.id === boardId
+          ? {
+              ...board,
+              links: board.links.map((link) =>
+                link.id === linkId ? { ...link, title, url, hostname } : link
+              ),
+            }
+          : board
+      )
+    );
+  }
+
+  // delete link logic
+  function deleteLink(boardId, linkId) {
+    setBoards((prev) =>
+      prev.map((board) =>
+        board.id === boardId
+          ? {
+              ...board,
+              links: board.links.filter((link) => link.id !== linkId),
+            }
+          : board
+      )
+    );
   }
 
   // import bookmarks logic
@@ -182,8 +274,10 @@ function App() {
         <Boards
           boards={boards}
           settings={settings}
-          deleteBoard={deleteBoard}
           setModal={setModal}
+          addLink={addLink}
+          editBoardTitle={editBoardTitle}
+          editLink={editLink}
         />
         {searchOpen && (
           <SearchModal
@@ -214,10 +308,21 @@ function App() {
             {modal.type === 'deleteBoard' && (
               <DeleteWarning
                 title='Delete Board'
-                message={`Delete "${modal.boardTitle}"?`}
+                message={`Sure to delete board - "${modal.boardTitle}"?`}
                 setModal={setModal}
                 onConfirm={() => {
                   deleteBoard(modal.boardId);
+                  setModal(null);
+                }}
+              />
+            )}
+            {modal.type === 'deleteLink' && (
+              <DeleteWarning
+                title='Delete Link'
+                message={`Sure to delete link - "${modal.linkTitle}"?`}
+                setModal={setModal}
+                onConfirm={() => {
+                  deleteLink(modal.boardId, modal.linkId);
                   setModal(null);
                 }}
               />
