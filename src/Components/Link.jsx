@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Link.module.css';
 
 export default function Link({
@@ -46,12 +46,30 @@ export default function Link({
           value={newTitle}
           autoFocus
           onChange={(e) => setNewTitle(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              setEditingLink(false);
+              setNewTitle(link.title);
+              setNewUrl(link.url);
+            } else if (e.key === 'Enter') {
+              e.currentTarget.form.requestSubmit();
+            }
+          }}
         />
         <input
           className={styles.newLinkUrl}
           type='url'
           value={newUrl}
           onChange={(e) => setNewUrl(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') {
+              setEditingLink(false);
+              setNewTitle(link.title);
+              setNewUrl(link.url);
+            } else if (e.key === 'Enter') {
+              e.currentTarget.form.requestSubmit();
+            }
+          }}
         />
         <div className={styles.editLinkButtons}>
           <button

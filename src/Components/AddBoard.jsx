@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './AddBoard.module.css';
 
 export default function AddBoard({ addboard, setAddBoardButton, setToast }) {
@@ -22,11 +22,23 @@ export default function AddBoard({ addboard, setAddBoardButton, setToast }) {
     setAddBoardButton(false);
   }
 
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') {
+        setAddBoardButton(false);
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <div className={styles.addboardDiv}>
       <h3 className={styles.addBoardTitle}>Add new Board</h3>
       <form
-        onSubmit={() => {
+        onSubmit={(e) => {
+          e.preventDefault();
           handleSubmit(boardTitle, columnNum);
         }}
       >
@@ -87,13 +99,7 @@ export default function AddBoard({ addboard, setAddBoardButton, setToast }) {
           >
             Cancel
           </button>
-          <button
-            className={styles.addBoardButton}
-            onClick={(e) => {
-              e.preventDefault();
-              handleSubmit(boardTitle, columnNum);
-            }}
-          >
+          <button className={styles.addBoardButton} type='submit'>
             Add Board
           </button>
         </div>

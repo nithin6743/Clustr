@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Board.module.css';
 import glass from './GlassUI.module.css';
 import Link from './Link';
@@ -34,20 +34,33 @@ export default function Board({
               value={newTitle}
               autoFocus
               onChange={(e) => setNewTitle(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Escape') {
+                  setEditingTitle(false);
+                  setNewTitle(board.title);
+                } else if (e.key === 'Enter') {
+                  e.target.blur();
+                }
+              }}
               onBlur={() => {
                 const trimmedTitle = newTitle.trim();
 
-                if (trimmedTitle) {
-                  editBoardTitle(board.id, trimmedTitle);
-                } else {
+                if (!trimmedTitle) {
+                  setNewTitle(board.title);
+
                   setTimeout(() => {
                     setToast({
                       id: crypto.randomUUID(),
                       type: 'error',
-                      message: 'Changing board title failed (empty title)',
+                      message: 'Board title cannot be empty',
                     });
                   }, 150);
+
+                  setEditingTitle(false);
+                  return;
                 }
+
+                editBoardTitle(board.id, trimmedTitle);
                 setEditingTitle(false);
               }}
             />
@@ -185,6 +198,12 @@ export default function Board({
                 placeholder='Enter url...'
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape') {
+                    setUrl('');
+                    setShowAddLink(false);
+                  }
+                }}
               />
 
               <div className={styles.addLinkButtons}>
