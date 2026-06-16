@@ -22,10 +22,13 @@ export default function Link({
           const url = newUrl.trim();
 
           if (!title || !url) {
-            setToast({
-              type: 'error',
-              message: 'Title and url cannot be empty for a link',
-            });
+            setTimeout(() => {
+              setToast({
+                id: crypto.randomUUID(),
+                type: 'error',
+                message: 'Title and url cannot be empty for a link',
+              });
+            }, 150);
             return;
           }
           editLink(boardId, link.id, title, url);

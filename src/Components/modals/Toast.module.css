@@ -1,7 +1,65 @@
 .toast {
   position: fixed;
-  z-index: 10000;
-  top: 2%;
-  left: 2%;
-  background-color: aliceblue;
+  top: 56px;
+  right: 8px;
+  width: 220px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  overflow: hidden;
+  white-space: normal;
+  overflow-wrap: break-word;
+  color: #363636;
+  font-size: 16px;
+  font-weight: bold;
+  animation: slideIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  animation: countdown 5s linear forwards;
+}
+
+@keyframes countdown {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.success::after {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.error::after {
+  background: rgba(255, 255, 255, 0.9);
+}
+.success {
+  background: rgba(166, 255, 183, 0.9);
+}
+
+.error {
+  background: rgba(255, 141, 141, 0.9);
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(120%);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

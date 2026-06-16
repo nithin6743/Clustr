@@ -40,10 +40,13 @@ export default function Board({
                 if (trimmedTitle) {
                   editBoardTitle(board.id, trimmedTitle);
                 } else {
-                  setToast({
-                    type: 'error',
-                    message: 'Changing board title failed (empty title)',
-                  });
+                  setTimeout(() => {
+                    setToast({
+                      id: crypto.randomUUID(),
+                      type: 'error',
+                      message: 'Changing board title failed (empty title)',
+                    });
+                  }, 150);
                 }
                 setEditingTitle(false);
               }}
@@ -160,10 +163,13 @@ export default function Board({
                 e.preventDefault();
 
                 if (!url.trim()) {
-                  setToast({
-                    type: 'error',
-                    message: 'Add link failed (empty url)',
-                  });
+                  setTimeout(() => {
+                    setToast({
+                      id: crypto.randomUUID(),
+                      type: 'error',
+                      message: 'Add link failed (empty url)',
+                    });
+                  }, 150);
                   return;
                 }
 

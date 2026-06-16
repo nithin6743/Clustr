@@ -9,7 +9,6 @@ export default function TopBar({
   setAddBoardButton,
   setSettingsOpen,
   settings,
-  setToast,
 }) {
   return (
     <div className={styles.topBar}>

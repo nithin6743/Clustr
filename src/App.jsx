@@ -73,6 +73,7 @@ function App() {
 
     setBoards((prev) => [...prev, newBoard]);
     setToast({
+      id: crypto.randomUUID(),
       type: 'success',
       message: 'Board created',
     });
@@ -85,19 +86,25 @@ function App() {
         board.id === boardId ? { ...board, title: newTitle } : board
       )
     );
-    setToast({
-      type: 'success',
-      message: 'Board title updated',
-    });
+    setTimeout(() => {
+      setToast({
+        id: crypto.randomUUID(),
+        type: 'success',
+        message: 'Board title updated',
+      });
+    }, 150);
   }
 
   // delete board logic
   function deleteBoard(boardId) {
     setBoards((prev) => prev.filter((board) => board.id !== boardId));
-    setToast({
-      type: 'success',
-      message: 'Board deleted',
-    });
+    setTimeout(() => {
+      setToast({
+        id: crypto.randomUUID(),
+        type: 'success',
+        message: 'Board deleted',
+      });
+    }, 150);
   }
 
   // add links logic
@@ -106,10 +113,13 @@ function App() {
     try {
       parsedUrl = new URL(url);
     } catch {
-      setToast({
-        type: 'error',
-        message: 'Failed to add link (empty url)',
-      });
+      setTimeout(() => {
+        setToast({
+          id: crypto.randomUUID(),
+          type: 'error',
+          message: 'Failed to add link (empty url)',
+        });
+      }, 150);
       return;
     }
     const hostname = parsedUrl.hostname.replace(/^www\./, '');
@@ -136,11 +146,14 @@ function App() {
         if (board.id !== boardId) return board;
         const dupLinkExist = board.links.some((link) => link.url === url);
         if (dupLinkExist) {
-          setToast({
-            type: 'error',
-            message: 'Link already exists in that board',
-          });
-          return board;
+          setTimeout(() => {
+            setToast({
+              id: crypto.randomUUID(),
+              type: 'error',
+              message: 'Link already exists in that board',
+            });
+            return board;
+          }, 150);
         }
         return {
           ...board,
@@ -148,10 +161,13 @@ function App() {
         };
       })
     );
-    setToast({
-      type: 'success',
-      message: 'Link added',
-    });
+    setTimeout(() => {
+      setToast({
+        id: crypto.randomUUID(),
+        type: 'success',
+        message: 'Link added',
+      });
+    }, 150);
   }
 
   // edit link
@@ -161,10 +177,13 @@ function App() {
     try {
       hostname = new URL(url).hostname;
     } catch {
-      setToast({
-        type: 'error',
-        message: 'link edit failed (Invalid url)',
-      });
+      setTimeout(() => {
+        setToast({
+          id: crypto.randomUUID(),
+          type: 'error',
+          message: 'link edit failed (Invalid url)',
+        });
+      }, 150);
       return;
     }
 
@@ -180,10 +199,13 @@ function App() {
           : board
       )
     );
-    setToast({
-      type: 'success',
-      message: 'Link updated',
-    });
+    setTimeout(() => {
+      setToast({
+        id: crypto.randomUUID(),
+        type: 'success',
+        message: 'Link updated',
+      });
+    }, 150);
   }
 
   // delete link logic
@@ -198,10 +220,13 @@ function App() {
           : board
       )
     );
-    setToast({
-      type: 'success',
-      message: 'Link deleted',
-    });
+    setTimeout(() => {
+      setToast({
+        id: crypto.randomUUID(),
+        type: 'success',
+        message: 'Link deleted',
+      });
+    }, 150);
   }
 
   // import bookmarks logic
@@ -232,10 +257,13 @@ function App() {
 
       traverse(tree);
       setBookmarks(extracted);
-      setToast({
-        type: 'success',
-        message: 'Bookmarks loaded successfully',
-      });
+      setTimeout(() => {
+        setToast({
+          id: crypto.randomUUID(),
+          type: 'success',
+          message: 'Bookmarks loaded successfully',
+        });
+      }, 150);
     });
   }, []);
 
@@ -309,7 +337,6 @@ function App() {
           setAddBoardButton={setAddBoardButton}
           setSettingsOpen={setSettingsOpen}
           settings={settings}
-          setToast={setToast}
         />
         <Boards
           boards={boards}
@@ -371,7 +398,7 @@ function App() {
             )}
           </Modal>
         )}
-        {toast && <Toast toast={toast} setToast={setToast} />}
+        {toast && <Toast key={toast.id} toast={toast} setToast={setToast} />}
       </div>
     </>
   );

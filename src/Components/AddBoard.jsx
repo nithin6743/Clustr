@@ -7,10 +7,13 @@ export default function AddBoard({ addboard, setAddBoardButton, setToast }) {
 
   function handleSubmit(boardTitle, columnNum) {
     if (!boardTitle || !columnNum) {
-      setToast({
-        type: 'error',
-        message: 'Failed to create board (empty title)',
-      });
+      setTimeout(() => {
+        setToast({
+          id: crypto.randomUUID(),
+          type: 'error',
+          message: 'Failed to create board (empty title)',
+        });
+      }, 150);
       return;
     }
 
