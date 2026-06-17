@@ -135,11 +135,15 @@ function App() {
       .split(' ')
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
+
+    const targetBoard = boards.filter((board) => board.id === boardId);
+
     const newLink = {
       id: crypto.randomUUID(),
       title: displayTitle,
       url,
       hostname,
+      position: targetBoard.links.length,
     };
     setBoards((prev) =>
       prev.map((board) => {
