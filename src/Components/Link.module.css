@@ -3,6 +3,26 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  cursor: grab;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease;
+}
+
+.dragging {
+  opacity: 0.92;
+  z-index: 1000;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.link:active {
+  transform: scale(0.98);
+  cursor: grabbing;
+}
+
+.holdReady {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
 }
 
 .linkAddress {
@@ -57,4 +77,32 @@
   white-space: nowrap;
 }
 
-/* .editLink{} */
+.dragHandle {
+  cursor: grab;
+  user-select: none;
+  padding: 0 6px;
+}
+
+.dragHandle:active {
+  cursor: grabbing;
+}
+
+.dragHandle {
+  cursor: grab;
+  user-select: none;
+  font-size: 18px;
+  opacity: 0.6;
+  padding: 4px;
+}
+
+.dragHandle:hover {
+  opacity: 1;
+}
+
+.dragHandle:active {
+  cursor: grabbing;
+}
+
+.pressingHandle {
+  transform: scale(0.9);
+}

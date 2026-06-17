@@ -1,5 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './Link.module.css';
+
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 export default function Link({
   link,
@@ -12,6 +15,23 @@ export default function Link({
   const [editingLink, setEditingLink] = useState(false);
   const [newTitle, setNewTitle] = useState(link.title);
   const [newUrl, setNewUrl] = useState(link.url);
+  const [pressing, setPressing] = useState(false);
+
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: link.id,
+  });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition: transition || 'transform 250ms cubic-bezier(0.22,1,0.36,1)',
+  };
 
   return editingLink ? (
     <div className={styles.editingLink}>
@@ -89,8 +109,26 @@ export default function Link({
     </div>
   ) : (
     <div
-      className={`${styles.link} ${settings.darkMode ? styles.linkDark : styles.linkLight}`}
+      ref={setNodeRef}
+      style={style}
+      className={`
+  ${styles.link}
+  ${settings.darkMode ? styles.linkDark : styles.linkLight}
+  
+`}
     >
+      <div
+        className={`${styles.dragHandle} ${
+          pressing ? styles.pressingHandle : ''
+        }`}
+        {...attributes}
+        {...listeners}
+        onMouseDown={() => setPressing(true)}
+        onMouseUp={() => setPressing(false)}
+        onMouseLeave={() => setPressing(false)}
+      >
+        ⋮⋮
+      </div>
       <a href={link.url} className={styles.linkAddress}>
         <img src={`https://www.google.com/s2/favicons?domain=${link.url}`} />
         <span
@@ -133,14 +171,14 @@ export default function Link({
         <button
           className={styles.deleteIcon}
           //   title='Delete Board'
-          onClick={() =>
+          onClick={() => {
             setModal({
               type: 'deleteLink',
               boardId,
               linkId: link.id,
               linkTitle: link.title,
-            })
-          }
+            });
+          }}
         >
           <svg
             // className={styles.deleteIcon}

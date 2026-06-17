@@ -136,7 +136,7 @@ function App() {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
 
-    const targetBoard = boards.filter((board) => board.id === boardId);
+    const targetBoard = boards.find((board) => board.id === boardId);
 
     const newLink = {
       id: crypto.randomUUID(),
@@ -156,8 +156,8 @@ function App() {
               type: 'error',
               message: 'Link already exists in that board',
             });
-            return board;
           }, 150);
+          return board;
         }
         return {
           ...board,
@@ -297,6 +297,32 @@ function App() {
     localStorage.setItem('clustr-boards', JSON.stringify(boards));
   }, [boards]);
 
+  // reorder Links
+  function reOrderLinks(boardId, activeId, overId) {
+    setBoards((prev) =>
+      prev.map((board) => {
+        if (board.id !== boardId) return board;
+
+        const links = [...board.links];
+        const oldIndex = links.findIndex((link) => link.id === activeId);
+        const newIndex = links.findIndex((link) => link.id === overId);
+
+        if (oldIndex === -1 || newIndex === -1) return board;
+
+        const movedLink = links.splice(oldIndex, 1)[0];
+        links.splice(newIndex, 0, movedLink);
+
+        return {
+          ...board,
+          links: links.map((link, index) => ({
+            ...link,
+            position: index,
+          })),
+        };
+      })
+    );
+  }
+
   return (
     <>
       <div className='appBackground'>
@@ -350,6 +376,7 @@ function App() {
           editBoardTitle={editBoardTitle}
           editLink={editLink}
           setToast={setToast}
+          reOrderLinks={reOrderLinks}
         />
         {searchOpen && (
           <SearchModal
