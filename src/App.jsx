@@ -323,6 +323,33 @@ function App() {
     );
   }
 
+  // move links
+  function moveLink(sourceBoardId, targetBoardId, linkId) {
+    setBoards((prev) => {
+      const sourceBoard = prev.find((b) => b.id === sourceBoardId);
+
+      const link = sourceBoard.links.find((l) => l.id === linkId);
+
+      return prev.map((board) => {
+        if (board.id === sourceBoardId) {
+          return {
+            ...board,
+            links: board.links.filter((l) => l.id !== linkId),
+          };
+        }
+
+        if (board.id === targetBoardId) {
+          return {
+            ...board,
+            links: [...board.links, link],
+          };
+        }
+
+        return board;
+      });
+    });
+  }
+
   return (
     <>
       <div className='appBackground'>
@@ -377,6 +404,7 @@ function App() {
           editLink={editLink}
           setToast={setToast}
           reOrderLinks={reOrderLinks}
+          moveLink={moveLink}
         />
         {searchOpen && (
           <SearchModal

@@ -2,16 +2,12 @@ import { useState } from 'react';
 import styles from './Board.module.css';
 import glass from './GlassUI.module.css';
 import Link from './Link';
-import {
-  DndContext,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from '@dnd-kit/core';
+
 import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
+import { useDroppable } from '@dnd-kit/core';
 
 export default function Board({
   board,
@@ -22,20 +18,15 @@ export default function Board({
   editLink,
   setToast,
   reOrderLinks,
+  moveLink,
 }) {
   const [showAddLink, setShowAddLink] = useState(false);
   const [EditingTitle, setEditingTitle] = useState(false);
   const [newTitle, setNewTitle] = useState(board.title);
   const [url, setUrl] = useState('');
-
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: {
-        delay: 200,
-        tolerance: 8,
-      },
-    })
-  );
+  const { setNodeRef } = useDroppable({
+    id: board.id,
+  });
 
   return (
     <div
@@ -176,99 +167,93 @@ export default function Board({
         </div>
       </div>
       <>
-        <DndContext
-          sensors={sensors}
-          onDragEnd={({ active, over }) => {
-            if (!over) return;
-
-            reOrderLinks(board.id, active.id, over.id);
-          }}
+        <SortableContext
+          items={board.links.map((link) => link.id)}
+          strategy={verticalListSortingStrategy}
         >
-          <SortableContext
-            items={board.links.map((link) => link.id)}
-            strategy={verticalListSortingStrategy}
-          >
-            <div className={styles.links}>
-              {board.links.map((link) => {
-                return (
-                  <Link
-                    key={link.id}
-                    link={link}
-                    settings={settings}
-                    setModal={setModal}
-                    boardId={board.id}
-                    editLink={editLink}
-                    setToast={setToast}
-                  />
-                );
-              })}
-              {showAddLink && (
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
+          <div ref={setNodeRef} className={styles.links}>
+            {board.links.length === 0 && (
+              <div className={styles.emptyBoard}>Create or Drop links here</div>
+            )}
+            {board.links.map((link) => {
+              return (
+                <Link
+                  key={link.id}
+                  link={link}
+                  settings={settings}
+                  setModal={setModal}
+                  boardId={board.id}
+                  editLink={editLink}
+                  setToast={setToast}
+                />
+              );
+            })}
+            {showAddLink && (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
 
-                    if (!url.trim()) {
-                      setTimeout(() => {
-                        setToast({
-                          id: crypto.randomUUID(),
-                          type: 'error',
-                          message: 'Add link failed (empty url)',
-                        });
-                      }, 150);
-                      return;
+                  if (!url.trim()) {
+                    setTimeout(() => {
+                      setToast({
+                        id: crypto.randomUUID(),
+                        type: 'error',
+                        message: 'Add link failed (empty url)',
+                      });
+                    }, 150);
+                    return;
+                  }
+
+                  addLink(board.id, url);
+
+                  setUrl('');
+                  setShowAddLink(false);
+                }}
+              >
+                <input
+                  className={styles.addLink}
+                  type='url'
+                  placeholder='Enter url...'
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape') {
+                      setUrl('');
+                      setShowAddLink(false);
                     }
-
-                    addLink(board.id, url);
-
-                    setUrl('');
-                    setShowAddLink(false);
                   }}
-                >
-                  <input
-                    className={styles.addLink}
-                    type='url'
-                    placeholder='Enter url...'
-                    value={url}
-                    onChange={(e) => setUrl(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Escape') {
-                        setUrl('');
-                        setShowAddLink(false);
-                      }
-                    }}
-                  />
+                />
 
-                  <div className={styles.addLinkButtons}>
-                    <button
-                      type='button'
-                      onClick={() => {
-                        setUrl('');
-                        setShowAddLink(false);
-                      }}
-                      style={{
-                        color: 'rgb(255, 216, 162)',
-                        backgroundColor: 'transparent',
-                        border: '1.5px solid rgb(252, 169, 53)',
-                      }}
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      type='submit'
-                      style={{
-                        color: 'rgb(255, 255, 255)',
-                        backgroundColor: 'rgb(252, 169, 53)',
-                        border: '1.5px solid rgb(252, 169, 53)',
-                      }}
-                    >
-                      Add
-                    </button>
-                  </div>
-                </form>
-              )}
-            </div>
-          </SortableContext>
-        </DndContext>
+                <div className={styles.addLinkButtons}>
+                  <button
+                    type='button'
+                    onClick={() => {
+                      setUrl('');
+                      setShowAddLink(false);
+                    }}
+                    style={{
+                      color: 'rgb(255, 216, 162)',
+                      backgroundColor: 'transparent',
+                      border: '1.5px solid rgb(252, 169, 53)',
+                    }}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type='submit'
+                    style={{
+                      color: 'rgb(255, 255, 255)',
+                      backgroundColor: 'rgb(252, 169, 53)',
+                      border: '1.5px solid rgb(252, 169, 53)',
+                    }}
+                  >
+                    Add
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </SortableContext>
       </>
     </div>
   );

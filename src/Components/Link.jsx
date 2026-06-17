@@ -26,6 +26,11 @@ export default function Link({
     isDragging,
   } = useSortable({
     id: link.id,
+    data: {
+      boardId,
+      type: 'link',
+      link,
+    },
   });
 
   const style = {
