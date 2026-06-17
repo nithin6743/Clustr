@@ -2,6 +2,8 @@ import { useState } from 'react';
 import styles from './Board.module.css';
 import glass from './GlassUI.module.css';
 import Link from './Link';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 import {
   SortableContext,
@@ -25,11 +27,35 @@ export default function Board({
   const [newTitle, setNewTitle] = useState(board.title);
   const [url, setUrl] = useState('');
   const { setNodeRef } = useDroppable({
-    id: board.id,
+    id: `board-drop-${board.id}`,
+    data: {
+      type: 'board-drop',
+      boardId: board.id,
+      columnId: board.column,
+    },
   });
+  const {
+    attributes,
+    listeners,
+    setNodeRef: setSortableRef,
+    transform,
+    transition,
+  } = useSortable({
+    id: board.id,
+    data: {
+      type: 'board',
+      columnId: board.column,
+    },
+  });
+  const boardStyle = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
 
   return (
     <div
+      ref={setSortableRef}
+      style={boardStyle}
       className={`${styles.board} ${settings.darkMode ? glass.glassDark : glass.glassLight}`}
     >
       <div
@@ -76,14 +102,29 @@ export default function Board({
               }}
             />
           ) : (
-            <h3
-              className={styles.boardTitle}
-              style={
-                settings.darkMode ? { color: '#ffff' } : { color: '#101010c1' }
-              }
-            >
-              {board.title}{' '}
-            </h3>
+            <div className={styles.boardTitleContainer}>
+              <div
+                className={styles.boardDragHandle}
+                {...attributes}
+                {...listeners}
+                style={{
+                  color: settings.darkMode ? '#ffffff' : '#000000',
+                }}
+              >
+                ⋮⋮
+              </div>
+
+              <h3
+                className={styles.boardTitle}
+                style={
+                  settings.darkMode
+                    ? { color: '#ffff' }
+                    : { color: '#101010c1' }
+                }
+              >
+                {board.title}
+              </h3>
+            </div>
           )}
           <div className={styles.boardIcons}>
             {!EditingTitle && (
@@ -173,7 +214,23 @@ export default function Board({
         >
           <div ref={setNodeRef} className={styles.links}>
             {board.links.length === 0 && (
-              <div className={styles.emptyBoard}>Create or Drop links here</div>
+              <div className={styles.emptyBoard}>
+                Drop links here or click
+                <svg
+                  // className={styles.addIcon}
+                  xmlns='http://www.w3.org/2000/svg'
+                  width='20px'
+                  height='20px'
+                  viewBox='0 0 28 28'
+                >
+                  <path d='M0 0h24v24H0z' fill='none' />
+                  <path
+                    fill={settings.darkMode ? '#fff' : '#101010c1'}
+                    d='M17 17h-2.025q-.425 0-.7-.288T14 16t.288-.712T15 15h2v-2q0-.425.288-.712T18 12t.713.288T19 13v2h2q.425 0 .713.288T22 16t-.288.713T21 17h-2v2q0 .425-.288.713T18 20t-.712-.288T17 19zm-7 0H7q-2.075 0-3.537-1.463T2 12t1.463-3.537T7 7h3q.425 0 .713.288T11 8t-.288.713T10 9H7q-1.25 0-2.125.875T4 12t.875 2.125T7 15h3q.425 0 .713.288T11 16t-.288.713T10 17m-1-4q-.425 0-.712-.288T8 12t.288-.712T9 11h6q.425 0 .713.288T16 12t-.288.713T15 13zm13-1h-2q0-1.25-.875-2.125T17 9h-3.025q-.425 0-.7-.288T13 8t.288-.712T14 7h3q2.075 0 3.538 1.463T22 12'
+                  />
+                </svg>
+                to add one
+              </div>
             )}
             {board.links.map((link) => {
               return (

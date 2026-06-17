@@ -81,6 +81,7 @@
   cursor: grab;
   user-select: none;
   padding: 0 6px;
+  
 }
 
 .dragHandle:active {

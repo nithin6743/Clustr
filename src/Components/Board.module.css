@@ -116,4 +116,30 @@
   border: 1px solid #ffff;
   font-size: 18px;
   background: transparent;
+  display: flex;
+}
+
+.boardTitleContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.boardDragHandle {
+  cursor: grab;
+  user-select: none;
+  opacity: 0.6;
+  font-size: 16px;
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+.boardDragHandle:hover {
+  opacity: 1;
+}
+
+.boardDragHandle:active {
+  cursor: grabbing;
+  transform: scale(1.1);
 }

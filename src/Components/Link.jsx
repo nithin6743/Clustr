@@ -28,6 +28,7 @@ export default function Link({
     id: link.id,
     data: {
       boardId,
+      columnId: null,
       type: 'link',
       link,
     },
@@ -131,6 +132,7 @@ export default function Link({
         onMouseDown={() => setPressing(true)}
         onMouseUp={() => setPressing(false)}
         onMouseLeave={() => setPressing(false)}
+        style={{ color: settings.darkMode ? '#ffff' : '#000000' }}
       >
         ⋮⋮
       </div>

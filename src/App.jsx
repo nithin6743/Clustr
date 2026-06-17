@@ -8,6 +8,7 @@ import Modal from './Components/modals/Modal.jsx';
 import AddBoard from './Components/AddBoard.jsx';
 import Settings from './Components/Settings.jsx';
 import Toast from './Components/modals/Toast.jsx';
+import { arrayMove } from '@dnd-kit/sortable';
 
 function App() {
   const [boards, setBoards] = useState(() => {
@@ -323,13 +324,89 @@ function App() {
     );
   }
 
+  // reorder boards
+  function reOrderBoards(columnId, activeId, overId) {
+    setBoards((prev) => {
+      const columnBoards = prev
+        .filter((board) => board.column === columnId)
+        .sort((a, b) => a.position - b.position);
+
+      const oldIndex = columnBoards.findIndex((board) => board.id === activeId);
+
+      const newIndex = columnBoards.findIndex((board) => board.id === overId);
+
+      const reordered = arrayMove(columnBoards, oldIndex, newIndex);
+
+      return prev.map((board) => {
+        const index = reordered.findIndex((b) => b.id === board.id);
+
+        if (index === -1) return board;
+
+        return {
+          ...board,
+          position: index,
+        };
+      });
+    });
+  }
+
+  // move boards
+  function moveBoard(sourceColumn, targetColumn, boardId) {
+    setBoards((prev) => {
+      const boardToMove = prev.find((board) => board.id === boardId);
+
+      if (!boardToMove) return prev;
+
+      const remainingBoards = prev.filter((board) => board.id !== boardId);
+
+      const targetBoards = remainingBoards
+        .filter((board) => board.column === targetColumn)
+        .sort((a, b) => a.position - b.position);
+
+      const otherBoards = remainingBoards.filter(
+        (board) => board.column !== targetColumn
+      );
+
+      const movedBoard = {
+        ...boardToMove,
+        column: targetColumn,
+        position: 0,
+      };
+
+      const updatedTargetBoards = [movedBoard, ...targetBoards].map(
+        (board, index) => ({
+          ...board,
+          position: index,
+        })
+      );
+
+      return [
+        ...otherBoards.map((board) => {
+          if (board.column === sourceColumn) {
+            const boardsInSource = otherBoards
+              .filter((b) => b.column === sourceColumn)
+              .sort((a, b) => a.position - b.position);
+
+            const position = boardsInSource.findIndex((b) => b.id === board.id);
+
+            return {
+              ...board,
+              position,
+            };
+          }
+
+          return board;
+        }),
+        ...updatedTargetBoards,
+      ];
+    });
+  }
+
   // move links
-  function moveLink(sourceBoardId, targetBoardId, linkId) {
+  function moveLink(sourceBoardId, targetBoardId, linkId, targetLinkId) {
     setBoards((prev) => {
       const sourceBoard = prev.find((b) => b.id === sourceBoardId);
-
       const link = sourceBoard.links.find((l) => l.id === linkId);
-
       return prev.map((board) => {
         if (board.id === sourceBoardId) {
           return {
@@ -339,9 +416,19 @@ function App() {
         }
 
         if (board.id === targetBoardId) {
+          const newLinks = [...board.links];
+
+          const targetIndex = newLinks.findIndex((l) => l.id === targetLinkId);
+
+          if (targetIndex === -1) {
+            newLinks.push(link);
+          } else {
+            newLinks.splice(targetIndex, 0, link);
+          }
+
           return {
             ...board,
-            links: [...board.links, link],
+            links: newLinks,
           };
         }
 
@@ -405,6 +492,8 @@ function App() {
           setToast={setToast}
           reOrderLinks={reOrderLinks}
           moveLink={moveLink}
+          reOrderBoards={reOrderBoards}
+          moveBoard={moveBoard}
         />
         {searchOpen && (
           <SearchModal

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styles from './Boards.module.css';
 import Board from './Board';
 import {
@@ -6,8 +7,29 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  useDroppable,
 } from '@dnd-kit/core';
-import { useState } from 'react';
+
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+
+function ColumnDropZone({ columnId, children }) {
+  const { setNodeRef } = useDroppable({
+    id: columnId,
+    data: {
+      type: 'column',
+      columnId,
+    },
+  });
+
+  return (
+    <div ref={setNodeRef} className={styles.column}>
+      {children}
+    </div>
+  );
+}
 
 export default function Boards({
   boards,
@@ -19,6 +41,8 @@ export default function Boards({
   setToast,
   reOrderLinks,
   moveLink,
+  reOrderBoards,
+  moveBoard,
 }) {
   const columns = {
     col1: [],
@@ -51,19 +75,60 @@ export default function Boards({
       return;
     }
 
-    const sourceBoardId = active.data.current.boardId;
+    if (active.data.current.type === 'board') {
+      const sourceColumn = active.data.current.columnId;
 
-    const targetBoardId = over.data?.current?.boardId || over.id;
+      const overType = over.data?.current?.type;
+      if (overType === 'link') {
+        const targetBoardId = over.data.current.boardId;
 
-    if (sourceBoardId === targetBoardId) {
-      reOrderLinks(sourceBoardId, active.id, over.id);
+        const targetBoard = boards.find((board) => board.id === targetBoardId);
 
+        if (!targetBoard) {
+          setActiveLink(null);
+          return;
+        }
+
+        if (sourceColumn !== targetBoard.column) {
+          moveBoard(sourceColumn, targetBoard.column, active.id);
+        }
+
+        setActiveLink(null);
+        return;
+      }
+
+      if (overType === 'board' || overType === 'board-drop') {
+        const targetColumn = over.data.current.columnId;
+
+        const targetBoardId = over.data.current.boardId || over.id;
+
+        if (sourceColumn === targetColumn) {
+          reOrderBoards(sourceColumn, active.id, targetBoardId);
+        } else {
+          moveBoard(sourceColumn, targetColumn, active.id);
+        }
+      } else if (overType === 'column') {
+        moveBoard(sourceColumn, over.data.current.columnId, active.id);
+      }
+      console.log({
+        active: active.id,
+        activeType: active.data?.current?.type,
+        over: over?.id,
+        overType: over?.data?.current?.type,
+      });
       setActiveLink(null);
       return;
     }
 
-    moveLink(sourceBoardId, targetBoardId, active.id);
-
+    const sourceBoardId = active.data.current.boardId;
+    const targetBoardId = over.data?.current?.boardId || over.id;
+    // const targetLinkId = over.id;
+    if (sourceBoardId === targetBoardId) {
+      reOrderLinks(sourceBoardId, active.id, over.id);
+      setActiveLink(null);
+      return;
+    }
+    moveLink(sourceBoardId, targetBoardId, active.id, over.id);
     setActiveLink(null);
   }
 
@@ -80,22 +145,29 @@ export default function Boards({
     >
       <div className={styles.boards}>
         {Object.entries(columns).map(([columnId, columnBoards]) => (
-          <div key={columnId} className={styles.column}>
-            {columnBoards.map((board) => (
-              <Board
-                key={board.id}
-                board={board}
-                settings={settings}
-                setModal={setModal}
-                addLink={addLink}
-                editBoardTitle={editBoardTitle}
-                editLink={editLink}
-                setToast={setToast}
-                reOrderLinks={reOrderLinks}
-                moveLink={moveLink}
-              />
-            ))}
-          </div>
+          <ColumnDropZone key={columnId} columnId={columnId}>
+            <SortableContext
+              items={columnBoards.map((board) => board.id)}
+              strategy={verticalListSortingStrategy}
+            >
+              {columnBoards.map((board) => (
+                <Board
+                  key={board.id}
+                  board={board}
+                  settings={settings}
+                  setModal={setModal}
+                  addLink={addLink}
+                  editBoardTitle={editBoardTitle}
+                  editLink={editLink}
+                  setToast={setToast}
+                  reOrderLinks={reOrderLinks}
+                  moveLink={moveLink}
+                  reOrderBoards={reOrderBoards}
+                  moveBoard={moveBoard}
+                />
+              ))}
+            </SortableContext>
+          </ColumnDropZone>
         ))}
       </div>
       <DragOverlay>
