@@ -569,6 +569,7 @@ function App() {
             results={results}
             setSearchQuery={setSearchQuery}
             setSearchOpen={setSearchOpen}
+            settings={settings}
           />
         )}
         {addBoardButton && (

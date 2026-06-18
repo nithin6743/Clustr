@@ -67,6 +67,7 @@ export default function AddBoard({
               e.preventDefault();
               setColumnNum('col1');
             }}
+            style={{ color: settings.darkMode ? '#ffffffda' : '#00000092' }}
             className={columnNum === 'col1' ? styles.active : styles.default}
           >
             Col1
@@ -77,6 +78,7 @@ export default function AddBoard({
               e.preventDefault();
               setColumnNum('col2');
             }}
+            style={{ color: settings.darkMode ? '#ffffffda' : '#00000092' }}
             className={columnNum === 'col2' ? styles.active : styles.default}
           >
             Col2
@@ -87,6 +89,7 @@ export default function AddBoard({
               e.preventDefault();
               setColumnNum('col3');
             }}
+            style={{ color: settings.darkMode ? '#ffffffda' : '#00000092' }}
             className={columnNum === 'col3' ? styles.active : styles.default}
           >
             Col3
@@ -97,6 +100,7 @@ export default function AddBoard({
               e.preventDefault();
               setColumnNum('col4');
             }}
+            style={{ color: settings.darkMode ? '#ffffffda' : '#00000092' }}
             className={columnNum === 'col4' ? styles.active : styles.default}
           >
             Col4
@@ -111,6 +115,7 @@ export default function AddBoard({
           onChange={(e) => {
             setBoardTitle(e.target.value);
           }}
+          style={{ color: settings.darkMode ? '#ffffffda' : '#00000092' }}
         />
         <div className={styles.buttons}>
           <motion.button

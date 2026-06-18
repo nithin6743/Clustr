@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { motion } from 'motion/react';
 import styles from './SearchModal.module.css';
+import Settings from '../Settings';
 
 export default function SearchModal({
   searchQuery,
   setSearchQuery,
   setSearchOpen,
   results,
+  settings,
 }) {
   useEffect(() => {
     function handleKeyDown(e) {
@@ -46,6 +48,7 @@ export default function SearchModal({
               }}
               placeholder='Search Bookmarks... '
               className={styles.searchInput}
+              style={{ color: settings.darkMode ?"#ffffffc1" :"#000000c9" }}
             />
             <svg
               className={styles.icon}
