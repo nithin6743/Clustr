@@ -262,14 +262,53 @@ function App() {
 
       traverse(tree);
       setBookmarks(extracted);
-      setTimeout(() => {
-        setToast({
-          id: crypto.randomUUID(),
-          type: 'success',
-          message: 'Bookmarks loaded successfully',
-        });
-      }, 150);
     });
+  }, []);
+
+  // auto reload of bookmarks
+  useEffect(() => {
+    if (!chrome?.bookmarks) return;
+
+    function handleBookmarkCreated(id, bookmark) {
+      if (!bookmark.url) return;
+
+      const newLink = {
+        id,
+        title: bookmark.title,
+        url: bookmark.url,
+        hostname: new URL(bookmark.url).hostname,
+        position: 0,
+      };
+
+      setBoards((prev) =>
+        prev.map((board) => {
+          if (board.id !== 'imported') return board;
+
+          const alreadyExists = board.links.some(
+            (link) => link.url === bookmark.url
+          );
+
+          if (alreadyExists) return board;
+
+          setToast({
+            id: crypto.randomUUID(),
+            type: 'success',
+            message: 'New bookmark imported',
+          });
+
+          return {
+            ...board,
+            links: [...board.links, newLink],
+          };
+        })
+      );
+    }
+
+    chrome.bookmarks.onCreated.addListener(handleBookmarkCreated);
+
+    return () => {
+      chrome.bookmarks.onCreated.removeListener(handleBookmarkCreated);
+    };
   }, []);
 
   // imported board logic
@@ -286,6 +325,13 @@ function App() {
         links: bookmarks,
       },
     ]);
+    setTimeout(() => {
+      setToast({
+        id: crypto.randomUUID(),
+        type: 'success',
+        message: 'Bookmarks loaded successfully',
+      });
+    }, 150);
   }, [bookmarks]);
 
   // save settings logic

@@ -44,6 +44,7 @@ export default function AddBoard({ addboard, setAddBoardButton, setToast }) {
       >
         <div className={styles.columns}>
           <button
+            type='button'
             onClick={(e) => {
               e.preventDefault();
               setColumnNum('col1');
@@ -53,6 +54,7 @@ export default function AddBoard({ addboard, setAddBoardButton, setToast }) {
             Col1
           </button>
           <button
+            type='button'
             onClick={(e) => {
               e.preventDefault();
               setColumnNum('col2');
@@ -62,6 +64,7 @@ export default function AddBoard({ addboard, setAddBoardButton, setToast }) {
             Col2
           </button>
           <button
+            type='button'
             onClick={(e) => {
               e.preventDefault();
               setColumnNum('col3');
@@ -71,6 +74,7 @@ export default function AddBoard({ addboard, setAddBoardButton, setToast }) {
             Col3
           </button>
           <button
+            type='button'
             onClick={(e) => {
               e.preventDefault();
               setColumnNum('col4');
@@ -91,6 +95,7 @@ export default function AddBoard({ addboard, setAddBoardButton, setToast }) {
         />
         <div className={styles.buttons}>
           <button
+            type='button'
             className={styles.cancelAddBoard}
             onClick={(e) => {
               e.preventDefault();
