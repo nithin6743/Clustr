@@ -43,10 +43,10 @@ export default function Link({
     <div className={styles.editingLink}>
       <form
         className={styles.editingLinkForm}
-        style={{
-          color: settings.darkMode ? '#ffff' : '#000',
-          borderColor: settings.darkMode ? '#ffff' : '#000',
-        }}
+        // style={{
+        //   color: settings.darkMode ? '#ffff' : '#000',
+        //   borderColor: settings.darkMode ? '#ffff' : '#000',
+        // }}
         onSubmit={(e) => {
           e.preventDefault();
           const title = newTitle.trim();
@@ -77,8 +77,8 @@ export default function Link({
           value={newTitle}
           autoFocus
           style={{
-            color: settings.darkMode ? '#ffffffda' : '#000000e3',
-            borderColor: settings.darkMode ? '#ffffffda' : '#000000e3',
+            color: settings.darkMode ? '#ffffff' : '#000000e3',
+            borderColor: settings.darkMode ? '#ffffff' : '#000000e3',
           }}
           onChange={(e) => setNewTitle(e.target.value)}
           onKeyDown={(e) => {

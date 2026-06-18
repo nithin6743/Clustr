@@ -9,6 +9,7 @@ import AddBoard from './Components/AddBoard.jsx';
 import Settings from './Components/Settings.jsx';
 import Toast from './Components/modals/Toast.jsx';
 import { arrayMove } from '@dnd-kit/sortable';
+import OnBoarding from './Components/modals/OnBoarding.jsx';
 
 function App() {
   const [boards, setBoards] = useState(() => {
@@ -23,6 +24,9 @@ function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [addBoardButton, setAddBoardButton] = useState(false);
   const [toast, setToast] = useState(null);
+  const [showOnboarding, setShowOnboarding] = useState(() => {
+    return localStorage.getItem('clustr-onboarding-complete') !== 'true';
+  });
   const [settings, setSettings] = useState(() => {
     const saved = localStorage.getItem('clustr-settings');
 
@@ -583,10 +587,7 @@ function App() {
           </Modal>
         )}
         {settingsOpen && (
-          <Modal
-            setAddBoardButton={setAddBoardButton}
-            setSettingsOpen={setSettingsOpen}
-          >
+          <Modal closeModal={() => setSettingsOpen(false)}>
             <Settings settings={settings} setSettings={setSettings} />
           </Modal>
         )}
@@ -614,6 +615,11 @@ function App() {
                 }}
               />
             )}
+          </Modal>
+        )}
+        {showOnboarding && (
+          <Modal>
+            <OnBoarding setShowOnboarding={setShowOnboarding} />
           </Modal>
         )}
         {toast && <Toast key={toast.id} toast={toast} setToast={setToast} />}

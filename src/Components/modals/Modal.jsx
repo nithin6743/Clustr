@@ -1,16 +1,13 @@
 import styles from './Modal.module.css';
 
-export default function Modal({
-  children,
-  setAddBoardButton,
-  setSettingsOpen,
-}) {
+export default function Modal({ children, closeModal, disableClose = false }) {
   return (
     <div
       className={styles.backDrop}
       onClick={() => {
-        setAddBoardButton(false);
-        setSettingsOpen(false);
+        if (!disableClose) {
+          closeModal?.();
+        }
       }}
     >
       <div className={styles.searchModal} onClick={(e) => e.stopPropagation()}>

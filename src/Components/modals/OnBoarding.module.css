@@ -1,0 +1,42 @@
+.onboarding {
+  width: 1500px;
+  position: relative;
+}
+
+.slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 40px;
+}
+
+.slide video {
+  width: 70%;
+  border-radius: 12px;
+}
+
+.slide h2 {
+  font-size: 24px;
+}
+
+.slide p {
+  font-size: 16px;
+}
+
+.getStarted {
+    margin: 104px;
+  padding: 16px 32px;
+  background-color: transparent;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  color: #fff;
+  font-size: large;
+  font-family: Myfont;
+  font-weight: bolder;
+}
+
+.getStarted:hover {
+  cursor: pointer;
+  background-color: #fca935;
+}

@@ -270,7 +270,10 @@ export default function Board({
                   placeholder='Enter url...'
                   value={url}
                   autoFocus
-                  style={{ borderColor: settings.darkMode ? '#ffff' : '#000' }}
+                  style={{
+                    color: settings.darkMode ? '#ffff' : '#000',
+                    borderColor: settings.darkMode ? '#ffff' : '#000',
+                  }}
                   onChange={(e) => setUrl(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === 'Escape') {
