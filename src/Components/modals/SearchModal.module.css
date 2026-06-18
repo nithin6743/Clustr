@@ -8,8 +8,8 @@
 
 .searchModal {
   position: fixed;
-  top: 20%;
-  left: 50%;
+  top: 24%;
+  left: 32%;
   transform: translateX(-50%);
   width: 724px;
   z-index: 1000;
@@ -37,7 +37,7 @@
   align-items: center;
   padding: 1rem 4rem;
   scroll-behavior: smooth;
-  border-bottom: 0.1px solid #ffffff;
+  border-radius: 8px;
 }
 
 .indieResult:hover {
@@ -55,7 +55,7 @@
   width: 100%;
 }
 
-.searchInput::placeholder{
+.searchInput::placeholder {
   color: #ffffffb6;
 }
 

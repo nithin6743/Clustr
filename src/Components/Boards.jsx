@@ -215,7 +215,10 @@ export default function Boards({
         )}
 
         {activeDragItem?.type === 'board' && (
-          <div className={styles.boardDragPreview}>
+          <div
+            className={styles.boardDragPreview}
+            style={{ color: settings.darkMode ? '#ffff' : '#000' }}
+          >
             <h3>{activeDragItem.item.title}</h3>
 
             <span>{activeDragItem.item.links.length} links</span>

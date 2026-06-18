@@ -577,6 +577,7 @@ function App() {
               addboard={addboard}
               setAddBoardButton={setAddBoardButton}
               setToast={setToast}
+              settings={settings}
             />
           </Modal>
         )}

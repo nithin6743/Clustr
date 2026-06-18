@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'MyFont';
+  src: url('/font/Inter-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
 .board {
   display: flex;
   flex-direction: column;
@@ -16,8 +23,9 @@
 
 .boardTitle {
   margin: 0.25rem 0.25rem -0.2rem 0.5rem;
-  font-size: 1rem;
+  font-size: 18px;
   color: #ffffff;
+  font-family: 'MyFont';
 }
 
 .boardBoxDark::after {

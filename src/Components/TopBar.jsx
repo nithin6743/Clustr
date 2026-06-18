@@ -1,3 +1,4 @@
+import { motion } from 'motion/react';
 import styles from './TopBar.module.css';
 import glass from './GlassUI.module.css';
 import quickLinks from './data/quickLinks.json';
@@ -13,7 +14,7 @@ export default function TopBar({
   return (
     <div className={styles.topBar}>
       {settings.showSearchBar ? (
-        <form
+        <motion.form
           className={`${styles.searchBar}  ${settings.darkMode ? glass.glassDark : glass.glassLight}`}
           onSubmit={(e) => {
             e.preventDefault();
@@ -45,7 +46,7 @@ export default function TopBar({
               d='M5 1a4 4 0 1 0 2.452 7.16l2.694 2.693a.5.5 0 1 0 .707-.707L8.16 7.453A4 4 0 0 0 5 1M2 5a3 3 0 1 1 6 0a3 3 0 0 1-6 0'
             />
           </svg>
-        </form>
+        </motion.form>
       ) : (
         <div></div>
       )}
@@ -54,7 +55,13 @@ export default function TopBar({
           quickLinks
             .filter((link) => link.visible)
             .map((link) => (
-              <a href={link.url} key={link.name} className={styles.quickLink}>
+              <motion.a
+                whileHover={{ scale: 1.3, transition: { duration: 0.1 } }}
+                whileTap={{ scale: 0.9, transition: { duration: 0.1 } }}
+                href={link.url}
+                key={link.name}
+                className={styles.quickLink}
+              >
                 <img
                   src={link.icon}
                   alt={link.name}
@@ -66,11 +73,13 @@ export default function TopBar({
                     border: 'none',
                   }}
                 />
-              </a>
+              </motion.a>
             ))}
       </div>
       <div className={styles.actions}>
-        <button
+        <motion.button
+          whileHover={{ scale: 1.25, transition: { duration: 0.1 } }}
+          whileTap={{ scale: 0.9, transition: { duration: 0.1 } }}
           className={`${styles.actionButton} ${settings.darkMode ? glass.glassDark : glass.glassLight}`}
           onClick={() => setAddBoardButton(true)}
         >
@@ -93,9 +102,11 @@ export default function TopBar({
               <path d='m 128.00004,79.99995 v 96.0001' />
             </g>
           </svg>
-        </button>
+        </motion.button>
 
-        <button
+        <motion.button
+          whileHover={{ scale: 1.25, transition: { duration: 0.1 } }}
+          whileTap={{ scale: 0.9, transition: { duration: 0.1 } }}
           className={`${styles.actionButton} ${settings.darkMode ? glass.glassDark : glass.glassLight}`}
           onClick={() => setSettingsOpen(true)}
         >
@@ -113,7 +124,7 @@ export default function TopBar({
               stroke={settings.darkMode ? '#ffffffc1' : '#101010c1'}
             />
           </svg>
-        </button>
+        </motion.button>
       </div>
     </div>
   );

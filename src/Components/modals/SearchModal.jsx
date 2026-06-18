@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { motion } from 'motion/react';
 import styles from './SearchModal.module.css';
 
 export default function SearchModal({
@@ -21,7 +22,14 @@ export default function SearchModal({
   return (
     <>
       <div className={styles.backDrop} onClick={() => setSearchOpen(false)}>
-        <div className={styles.searchModal}>
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{
+            duration: 0.125,
+          }}
+          className={styles.searchModal}
+        >
           <form
             onClick={(e) => e.stopPropagation()}
             //   className={`${styles.searchBar} ${glass.glass}`}
@@ -71,7 +79,7 @@ export default function SearchModal({
               );
             })}
           </div>
-        </div>
+        </motion.div>
       </div>
     </>
   );

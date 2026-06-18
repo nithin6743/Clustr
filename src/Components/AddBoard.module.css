@@ -1,10 +1,10 @@
 .addboardDiv {
-  width: 400px;
+  width: 500px;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  border: 2px solid transparent;
   border-radius: 8px;
   padding: 40px 48px;
 }
@@ -14,23 +14,23 @@
 }
 
 .addBoardTitle {
-  margin: 0 0 32px 0;
+  margin: 0 0 40px 0;
   font-size: 30px;
   color: #ffffffd9;
 }
 
 .boardTitleInput {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   border: 2px solid rgba(255, 255, 255, 0.4);
   font-size: 18px;
   background-color: transparent;
   padding: 16px 24px;
   border-radius: 48px;
-  width: 352px;
+  width: 448px;
 }
 
 .boardTitleInput::placeholder {
-  color: #dddddd;
+  color: #545454;
   font-size: 16px;
 }
 
@@ -40,14 +40,14 @@
   background-color: transparent;
   padding: 16px 24px;
   border-radius: 48px;
-  width: 352px;
+  width: 448px;
 }
 
 .columns {
   margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
-  margin: 0 0 24px 0;
+  margin: 0 0 32px 0;
   align-items: center;
 }
 
@@ -99,9 +99,8 @@
 
 .cancelAddBoard {
   background-color: transparent;
-  border: 2px solid #fca935;
+  border: 4px solid #f58f00;
   border-radius: 8px;
-  color: #fca935;
   font-weight: bold;
 }
 

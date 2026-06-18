@@ -69,8 +69,8 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  transition: 0.75s ease;
 }
+
 .actionButton:hover {
   cursor: pointer;
   background-color: #fca935;
