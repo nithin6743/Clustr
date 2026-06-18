@@ -24,3 +24,16 @@
   cursor: grabbing;
   font-weight: 600;
 }
+.emptyColumn {
+  min-height: 150px;
+  width: 100%;
+  border: 2px dashed rgba(255, 255, 255, 0.241);
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.9rem;
+  opacity: 0.5;
+}

@@ -150,6 +150,9 @@ export default function Boards({
               items={columnBoards.map((board) => board.id)}
               strategy={verticalListSortingStrategy}
             >
+              {columnBoards.length === 0 && (
+                <div className={styles.emptyColumn}>Drop Boards Here</div>
+              )}
               {columnBoards.map((board) => (
                 <Board
                   key={board.id}
