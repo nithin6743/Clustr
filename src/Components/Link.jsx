@@ -42,6 +42,11 @@ export default function Link({
   return editingLink ? (
     <div className={styles.editingLink}>
       <form
+        className={styles.editingLinkForm}
+        style={{
+          color: settings.darkMode ? '#ffff' : '#000',
+          borderColor: settings.darkMode ? '#ffff' : '#000',
+        }}
         onSubmit={(e) => {
           e.preventDefault();
           const title = newTitle.trim();
@@ -71,6 +76,10 @@ export default function Link({
           type='text'
           value={newTitle}
           autoFocus
+          style={{
+            color: settings.darkMode ? '#ffffffda' : '#000000e3',
+            borderColor: settings.darkMode ? '#ffffffda' : '#000000e3',
+          }}
           onChange={(e) => setNewTitle(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Escape') {
@@ -86,6 +95,10 @@ export default function Link({
           className={styles.newLinkUrl}
           type='url'
           value={newUrl}
+          style={{
+            color: settings.darkMode ? '#ffffffda' : '#000000e3',
+            borderColor: settings.darkMode ? '#ffffffda' : '#000000e3',
+          }}
           onChange={(e) => setNewUrl(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Escape') {
@@ -106,10 +119,20 @@ export default function Link({
               setNewTitle(link.title);
               setNewUrl(link.url);
             }}
+            style={{
+              backgroundColor: 'transparent',
+              borderColor: settings.darkMode ? '#ffc677' : '#fca935',
+              color: settings.darkMode ? '#fff' : '#fd9400',
+            }}
           >
             Cancel
           </button>
-          <button type='submit'>Done</button>
+          <button
+            type='submit'
+            style={{ backgroundColor: '#fca935', borderColor: '#fca635' }}
+          >
+            Done
+          </button>
         </div>
       </form>
     </div>

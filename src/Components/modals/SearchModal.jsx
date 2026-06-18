@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styles from './SearchModal.module.css';
 
 export default function SearchModal({
@@ -6,6 +7,17 @@ export default function SearchModal({
   setSearchOpen,
   results,
 }) {
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') {
+        setSearchOpen(false);
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [setSearchOpen]);
   return (
     <>
       <div className={styles.backDrop} onClick={() => setSearchOpen(false)}>

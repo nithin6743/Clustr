@@ -179,7 +179,15 @@ export default function Boards({
               strategy={verticalListSortingStrategy}
             >
               {columnBoards.length === 0 && (
-                <div className={styles.emptyColumn}>Drop Boards Here</div>
+                <div
+                  className={
+                    settings.darkMode
+                      ? styles.emptyColumnDark
+                      : styles.emptyColumnLight
+                  }
+                >
+                  Drop Boards Here
+                </div>
               )}
               {columnBoards.map((board) => (
                 <Board

@@ -68,16 +68,26 @@
   flex-direction: column;
   gap: 0.25rem;
   margin: 0 0.25rem 1rem 0.25rem;
-  /* min-height: 60px; */
 }
 
-.emptyBoard {
+.emptyBoardDark {
   min-height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0.5;
-  border: 2px dashed rgba(255, 255, 255, 0.15);
+  opacity: 0.8;
+  border: 2px dashed #ffffff4b;
+  color: #ffffff40;
+  border-radius: 8px;
+}
+.emptyBoardLight {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  border: 2px dashed #00000044;
+  color: #00000067;
   border-radius: 8px;
 }
 
@@ -89,7 +99,7 @@
   width: 95%;
   padding: 10px 8px;
   background-color: transparent;
-  border: 1.75px solid #ffffff;
+  border: 1.75px solid;
   border-radius: 8px;
   margin-bottom: 8px;
 }
@@ -113,7 +123,7 @@
 .editingtitle {
   width: 70%;
   padding: 5px 8px 6px 8px;
-  border: 1px solid #ffff;
+  border: 1px solid;
   font-size: 18px;
   background: transparent;
   display: flex;

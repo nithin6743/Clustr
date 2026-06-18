@@ -100,3 +100,38 @@
 .pressingHandle {
   transform: scale(0.9);
 }
+
+.editingLink {
+  width: 100%;
+  display: flex;
+}
+
+.editingLinkForm {
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+.editingLink input {
+  width: 95%;
+  border: 1px solid;
+  border-radius: 8px;
+  background-color: transparent;
+  padding: 8px;
+  margin-bottom: 6px;
+}
+
+.editLinkButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editLinkButtons button {
+  padding: 8px;
+  border: 1px solid;
+  margin: 0 4px 0 4px;
+  border-radius: 8px;
+  width: 45%;
+  font-weight: bold;
+}

@@ -25,7 +25,7 @@
 .cancel {
   background-color: transparent;
   border: 2px solid rgb(252, 169, 53);
-  color: rgb(252, 169, 53);
+  color: rgb(255, 255, 255);
 }
 
 .delete {
