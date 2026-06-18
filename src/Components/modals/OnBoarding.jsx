@@ -79,6 +79,9 @@ export default function Onboarding({ setShowOnboarding }) {
 
         <SwiperSlide>
           <div className={styles.slide}>
+            <p style={{ color: '#fff' }}>
+              Before dragging links or boards hold click for 2 seconds
+            </p>
             <button
               onClick={finish}
               className={`${styles.getStarted} ${glass.glass}`}
