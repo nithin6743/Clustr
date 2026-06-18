@@ -77,13 +77,6 @@
   white-space: nowrap;
 }
 
-.dragHandle {
-  cursor: grab;
-  user-select: none;
-  padding: 0 6px;
-  
-}
-
 .dragHandle:active {
   cursor: grabbing;
 }
@@ -92,11 +85,11 @@
   cursor: grab;
   user-select: none;
   font-size: 18px;
-  opacity: 0.6;
+  opacity: 0;
   padding: 4px;
 }
 
-.dragHandle:hover {
+.link:hover .dragHandle {
   opacity: 1;
 }
 

@@ -405,30 +405,52 @@ function App() {
   // move links
   function moveLink(sourceBoardId, targetBoardId, linkId, targetLinkId) {
     setBoards((prev) => {
-      const sourceBoard = prev.find((b) => b.id === sourceBoardId);
-      const link = sourceBoard.links.find((l) => l.id === linkId);
+      const sourceBoard = prev.find((board) => board.id === sourceBoardId);
+
+      if (!sourceBoard) return prev;
+
+      const linkToMove = sourceBoard.links.find((link) => link.id === linkId);
+
+      if (!linkToMove) return prev;
+
       return prev.map((board) => {
+        // Remove from source board
         if (board.id === sourceBoardId) {
           return {
             ...board,
-            links: board.links.filter((l) => l.id !== linkId),
+            links: board.links
+              .filter((link) => link.id !== linkId)
+              .map((link, index) => ({
+                ...link,
+                position: index,
+              })),
           };
         }
 
+        // Insert into target board
         if (board.id === targetBoardId) {
           const newLinks = [...board.links];
 
-          const targetIndex = newLinks.findIndex((l) => l.id === targetLinkId);
-
-          if (targetIndex === -1) {
-            newLinks.push(link);
+          if (!targetLinkId) {
+            newLinks.push(linkToMove);
           } else {
-            newLinks.splice(targetIndex, 0, link);
+            const targetIndex = newLinks.findIndex(
+              (link) => link.id === targetLinkId
+            );
+
+            if (targetIndex === -1) {
+              newLinks.push(linkToMove);
+            } else {
+              newLinks.splice(targetIndex, 0, linkToMove);
+            }
           }
 
           return {
             ...board,
-            links: newLinks,
+            links: newLinks.map((link, index) => ({
+              ...link,
+              position: index,
+            })),
           };
         }
 

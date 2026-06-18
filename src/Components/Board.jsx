@@ -45,6 +45,7 @@ export default function Board({
     data: {
       type: 'board',
       columnId: board.column,
+      board,
     },
   });
   const boardStyle = {

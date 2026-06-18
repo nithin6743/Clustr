@@ -59,7 +59,7 @@ export default function Boards({
     column.sort((a, b) => a.position - b.position);
   });
 
-  const [activeLink, setActiveLink] = useState(null);
+  const [activeDragItem, setActiveDragItem] = useState(null);
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -71,7 +71,7 @@ export default function Boards({
 
   function handleDragEnd({ active, over }) {
     if (!over) {
-      setActiveLink(null);
+      setActiveDragItem(null);
       return;
     }
 
@@ -85,7 +85,7 @@ export default function Boards({
         const targetBoard = boards.find((board) => board.id === targetBoardId);
 
         if (!targetBoard) {
-          setActiveLink(null);
+          setActiveDragItem(null);
           return;
         }
 
@@ -93,7 +93,7 @@ export default function Boards({
           moveBoard(sourceColumn, targetBoard.column, active.id);
         }
 
-        setActiveLink(null);
+        setActiveDragItem(null);
         return;
       }
 
@@ -116,30 +116,58 @@ export default function Boards({
         over: over?.id,
         overType: over?.data?.current?.type,
       });
-      setActiveLink(null);
+      setActiveDragItem(null);
       return;
     }
 
     const sourceBoardId = active.data.current.boardId;
-    const targetBoardId = over.data?.current?.boardId || over.id;
-    // const targetLinkId = over.id;
-    if (sourceBoardId === targetBoardId) {
-      reOrderLinks(sourceBoardId, active.id, over.id);
-      setActiveLink(null);
+
+    const overType = over.data?.current?.type;
+
+    // Don't allow dropping links on columns
+    if (overType === 'column') {
+      setActiveDragItem(null);
       return;
     }
-    moveLink(sourceBoardId, targetBoardId, active.id, over.id);
-    setActiveLink(null);
+
+    const targetBoardId = over.data?.current?.boardId || over.id;
+
+    const targetLinkId = overType === 'board-drop' ? null : over.id;
+
+    if (sourceBoardId === targetBoardId) {
+      if (targetLinkId) {
+        reOrderLinks(sourceBoardId, active.id, targetLinkId);
+      }
+
+      setActiveDragItem(null);
+      return;
+    }
+
+    moveLink(sourceBoardId, targetBoardId, active.id, targetLinkId);
+
+    setActiveDragItem(null);
   }
 
   return (
     <DndContext
       sensors={sensors}
       onDragStart={({ active }) => {
-        setActiveLink(active.data.current.link);
+        if (active.data.current.type === 'link') {
+          setActiveDragItem({
+            type: 'link',
+            item: active.data.current.link,
+          });
+        }
+
+        if (active.data.current.type === 'board') {
+          setActiveDragItem({
+            type: 'board',
+            item: active.data.current.board,
+          });
+        }
       }}
       onDragCancel={() => {
-        setActiveLink(null);
+        setActiveDragItem(null);
       }}
       onDragEnd={handleDragEnd}
     >
@@ -174,9 +202,17 @@ export default function Boards({
         ))}
       </div>
       <DragOverlay>
-        {activeLink ? (
-          <div className={styles.dragPreview}>{activeLink.title}</div>
-        ) : null}
+        {activeDragItem?.type === 'link' && (
+          <div className={styles.dragPreview}>{activeDragItem.item.title}</div>
+        )}
+
+        {activeDragItem?.type === 'board' && (
+          <div className={styles.boardDragPreview}>
+            <h3>{activeDragItem.item.title}</h3>
+
+            <span>{activeDragItem.item.links.length} links</span>
+          </div>
+        )}
       </DragOverlay>
     </DndContext>
   );

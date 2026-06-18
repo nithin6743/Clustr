@@ -128,14 +128,14 @@
 .boardDragHandle {
   cursor: grab;
   user-select: none;
-  opacity: 0.6;
+  opacity: 0;
   font-size: 16px;
   transition:
     opacity 0.15s ease,
     transform 0.15s ease;
 }
 
-.boardDragHandle:hover {
+.board:hover .boardDragHandle {
   opacity: 1;
 }
 
