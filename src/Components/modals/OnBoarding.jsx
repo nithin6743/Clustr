@@ -31,7 +31,16 @@ export default function Onboarding({ setShowOnboarding }) {
             <p style={{ color: '#fff' }}>
               Your browser bookmarks are imported automatically when Clustr is
               installed. New bookmarks are added automatically while Clustr is
-              open.
+              open.<br></br>
+              <span
+                style={{
+                  fontSize: '20px',
+                  color: '#fca935',
+                  fontWeight: '700',
+                }}
+              >
+                Slide left for next
+              </span>
             </p>
           </div>
         </SwiperSlide>
@@ -80,7 +89,7 @@ export default function Onboarding({ setShowOnboarding }) {
         <SwiperSlide>
           <div className={styles.slide}>
             <p style={{ color: '#fff' }}>
-              Before dragging links or boards hold click for 2 seconds
+              Before dragging links or boards hold click for 2-3 seconds
             </p>
             <button
               onClick={finish}
