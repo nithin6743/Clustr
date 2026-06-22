@@ -4,7 +4,7 @@ A customizable bookmark workspace that transforms the browser's new tab page int
 
 Clustr automatically imports browser bookmarks and allows users to organize them into boards, move links with drag-and-drop, search instantly, and customize the experience with themes, animations, and layouts.
 
----
+
 
 ## Features
 
