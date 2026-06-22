@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import './index.css';
 import TopBar from './Components/TopBar.jsx';
 import Boards from './Components/Boards.jsx';
@@ -39,6 +39,9 @@ function App() {
           animatedBackground: true,
         };
   });
+
+  // Context API
+  const PostContext = createContext();
 
   // search logic
   const allLinks = (boards || []).flatMap((board) =>

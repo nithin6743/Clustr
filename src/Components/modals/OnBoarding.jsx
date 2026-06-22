@@ -1,4 +1,4 @@
-import styles from './Onboarding.module.css';
+import styles from './OnBoarding.module.css';
 import glass from '../GlassUI.module.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -27,8 +27,8 @@ export default function Onboarding({ setShowOnboarding }) {
             <video autoPlay muted loop playsInline>
               <source src='/onboarding/settings.webm' type='video/webm' />
             </video>
-            <h2 style={{ color: '#fff' }}>Automatic Bookmark Import</h2>
-            <p style={{ color: '#fff' }}>
+            <h2>Automatic Bookmark Import</h2>
+            <p>
               Your browser bookmarks are imported automatically when Clustr is
               installed. New bookmarks are added automatically while Clustr is
               open.<br></br>
@@ -50,9 +50,9 @@ export default function Onboarding({ setShowOnboarding }) {
               <source src='/onboarding/Topbar.webm' type='video/webm' />
             </video>
 
-            <h2 style={{ color: '#fff' }}>Quick Access</h2>
+            <h2>Quick Access</h2>
 
-            <p style={{ color: '#fff' }}>
+            <p>
               Search bookmarks instantly, create boards, and customize your
               workspace from a single toolbar.
             </p>
@@ -65,8 +65,8 @@ export default function Onboarding({ setShowOnboarding }) {
               <source src='/onboarding/Boards.webm' type='video/webm' />
             </video>
 
-            <h2 style={{ color: '#fff' }}>Organize Your New Tab</h2>
-            <p style={{ color: '#fff' }}>
+            <h2>Organize Your New Tab</h2>
+            <p>
               Create multiple boards and arrange them across columns to match
               your workflow. <br></br>Esc - cancel <br></br>Enter - confirm
             </p>
@@ -77,9 +77,9 @@ export default function Onboarding({ setShowOnboarding }) {
             <video autoPlay muted loop playsInline>
               <source src='/onboarding/links.webm' type='video/webm' />
             </video>
-            <h2 style={{ color: '#fff' }}>Manage Links Easily</h2>
+            <h2>Manage Links Easily</h2>
 
-            <p style={{ color: '#fff' }}>
+            <p>
               Add, edit, delete, and drag links between boards without affecting
               your browser bookmarks.
             </p>
@@ -88,9 +88,7 @@ export default function Onboarding({ setShowOnboarding }) {
 
         <SwiperSlide>
           <div className={styles.slide}>
-            <p style={{ color: '#fff' }}>
-              Before dragging links or boards hold click for 2-3 seconds
-            </p>
+            <p>Before dragging links or boards hold click for 2-3 seconds</p>
             <button
               onClick={finish}
               className={`${styles.getStarted} ${glass.glass}`}
