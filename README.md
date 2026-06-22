@@ -147,27 +147,6 @@ When Clustr is installed:
 
 ---
 
-## Project Structure
-
-```text
-src/
-│
-├── Components/
-│   ├── Boards/
-│   ├── Board/
-│   ├── Link/
-│   ├── Settings/
-│   ├── TopBar/
-│   └── modals/
-│
-├── Assets/
-│
-├── App.jsx
-└── main.jsx
-```
-
----
-
 ## Screenshot
 
 <img width="1917" height="942" alt="image" src="https://github.com/user-attachments/assets/8d4cebfd-3ec1-43c3-b067-7c335a5e4a02" />
@@ -180,17 +159,6 @@ src/
 * Local storage only
 * No cloud synchronization
 * No multi-device sync
-
----
-
-## Future Plans
-
-* Firefox support
-* Cloud synchronization
-* Account support
-* Backup & restore
-* Board templates
-* Advanced search filters
 
 ---
 
